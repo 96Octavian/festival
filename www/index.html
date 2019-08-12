@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="/statics/icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/statics/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/statics/icons/favicon-16x16.png">
+	<link rel="manifest" href="/statics/icons/site.webmanifest">
+	<link rel="mask-icon" href="/statics/icons/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+ 
+	<meta name="theme-color" content="#ffffff">    <title>Festival</title>
+
+	<!-- CSS    -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+    <!-- Dropdown Structure -->
+    <!-- Desktop -->
+    <ul id="event-dropdown" class="dropdown-content">
+        <li><a href="#!">All</a></li>
+        <li><a href="#!">Music</a></li>
+        <li><a href="#!">Theatre</a></li>
+        <li><a href="#!">Opera</a></li>
+        <li><a href="#!">Dance</a></li>
+        <li><a href="#!">Seminar</a></li>
+    </ul>
+    <!-- Mobile -->
+    <ul id="mobile-event-dropdown" class="dropdown-content">
+        <li><a href="#!">All</a></li>
+        <li><a href="#!">Music</a></li>
+        <li><a href="#!">Theatre</a></li>
+        <li><a href="#!">Opera</a></li>
+        <li><a href="#!">Dance</a></li>
+        <li><a href="#!">Seminar</a></li>
+    </ul>
+
+    <div class="navbar-fixed">
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="/index.html" class="brand-logo right">Home</a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a id="login-desktop" href="/login.html">Login/Register</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <!-- Dropdown Trigger -->
+                    <!-- // TODO: data-target indica quale id sarà mostrato, in init.js defininiamo la funzione ch lo attiva -->
+                    <li><a class="event-dropdown-trigger" href="#" data-target="event-dropdown">Events</a></li>
+                </ul>
+
+                <ul id="nav-mobile" class="sidenav">
+                    <li><a id="login-mobile" href="/login.html">Login/Register</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-event-dropdown">Events</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </div>
+
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br><br>
+                <h1 class="header center materialize-red-text text-darken-1">Festival</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light materialize-red-text text-darken-4" style="font-weight: bold">Lots of events!</h5>
+                </div>
+                <br><br>
+
+            </div>
+        </div>
+    </div>
+
+
+            <!--     Icon Section     -->
+            <div id="books-showcase" class="row">
+            </div>
+
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Who made this</h5>
+                    <p class="grey-text text-lighten-4">I'm a CS student, passionate about developement and networking, security and embedded systems.<br>This is my assignment for the Hypermedia Applications (web and multimedia) course at Politecnico di Milano.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="mailto:giuseppe.lonardoni@mail.polimi.it">e-mail</a></li>
+                        <li><a class="white-text" href="https://github.com/96Octavian">Github</a></li>
+                        <li><a class="white-text" href="https://www.linkedin.com/in/giuseppe-lonardoni">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made thanks to <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!--    Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
+</body>
+</html>
