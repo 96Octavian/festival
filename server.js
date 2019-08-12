@@ -1,3 +1,5 @@
+// TODO: Wrap events in events.html
+// TODO: Better spacing in events.html
 'use strict';
 
 var fs = require( 'fs' ),

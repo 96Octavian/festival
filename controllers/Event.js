@@ -5,7 +5,7 @@ var Event = require( '../service/EventService' );
 
 module.exports.getCalendar = function getCalendar( req, res, next ) {
 	var offset = req.swagger.params['offset'].value || 0;
-	var limit = req.swagger.params['limit'].value || 500;
+	var limit = req.swagger.params['limit'].value;
 	Event.getCalendar( offset, limit )
 		.then( function ( response ) {
 			utils.writeJson( res, response );

@@ -1,11 +1,199 @@
 ﻿<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/statics/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/statics/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/statics/icons/favicon-16x16.png">
+    <link rel="manifest" href="/statics/icons/site.webmanifest">
+    <link rel="mask-icon" href="/statics/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+
+    <meta name="theme-color" content="#ffffff">
+    <title>Your bookshelf</title>
+
+    <!-- CSS    -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
 </head>
 <body>
-    Simo culo
+    <!-- #region navbar  -->
+    <!-- Dropdown Structure -->
+    <!-- Desktop -->
+    <ul id="event-dropdown" class="dropdown-content">
+        <li><a href="events.html">All</a></li>
+        <li><a href="#!">Music</a></li>
+        <li><a href="#!">Theatre</a></li>
+        <li><a href="#!">Opera</a></li>
+        <li><a href="#!">Dance</a></li>
+        <li><a href="#!">Seminar</a></li>
+    </ul>
+    <!-- Mobile -->
+    <ul id="mobile-event-dropdown" class="dropdown-content">
+        <li><a href="events.html">All</a></li>
+        <li><a href="#!">Music</a></li>
+        <li><a href="#!">Theatre</a></li>
+        <li><a href="#!">Opera</a></li>
+        <li><a href="#!">Dance</a></li>
+        <li><a href="#!">Seminar</a></li>
+    </ul>
+
+    <div class="navbar-fixed">
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="/index.html" class="brand-logo right">Home</a>
+                <ul class="left hide-on-med-and-down">
+                    <li><a id="login-desktop" href="/login.html">Login/Register</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <!-- Dropdown Trigger -->
+                    <!-- // TODO: data-target indica quale id sarà mostrato, in init.js defininiamo la funzione ch lo attiva -->
+                    <li><a class="event-dropdown-trigger" href="#" data-target="event-dropdown">Events</a></li>
+                </ul>
+
+                <ul id="nav-mobile" class="sidenav">
+                    <li><a id="login-mobile" href="/login.html">Login/Register</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <li><a href="#">Navbar Link</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-event-dropdown">Events</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- #endregion  -->
+
+    <div class="container">
+        <div class="row">
+            <h3 class="left col s12 m12">Calendar</h3>
+        </div>
+        <div class="section">
+            <div class="row">
+
+                <div>
+                    <!--     Date Section     -->
+                    <h5 class="left col s12 m4">Date</h5>
+
+                    <!--     Events Section     -->
+                    <div class="col s12 m8">
+                        <p></p>
+                        <h6 style="display: inline;padding-right: 20px">Title</h6>
+                        <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p><p></p>
+                        <div>
+                            <button id="buy" class="btn waves-effect waves-light">
+                                Buy
+                                <i class="material-icons right">add_shopping_cart</i>
+                            </button>
+                            <button id="done" style="display:none" class="btn disabled">
+                                <i class="material-icons teal-text right">done</i>
+                            </button>
+                            <button id="unauthorized" style="display:none" class="btn disabled">
+                                <i class="material-icons teal-text right">cancel</i>
+                            </button>
+                            <h8 id="availability" class="teal-text">BOH</h8>
+                        </div>
+                        <p></p>
+                        <p></p>
+                        <h6 style="display: inline;padding-right: 20px">Title</h6>
+                        <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p><p></p>
+                        <div>
+                            <button id="buy" class="btn waves-effect waves-light">
+                                Buy
+                                <i class="material-icons right">add_shopping_cart</i>
+                            </button>
+                            <button id="done" style="display:none" class="btn disabled">
+                                <i class="material-icons teal-text right">done</i>
+                            </button>
+                            <button id="unauthorized" style="display:none" class="btn disabled">
+                                <i class="material-icons teal-text right">cancel</i>
+                            </button>
+                            <h8 id="availability" class="teal-text">BOH</h8>
+                        </div>
+                        <p></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+                <div>
+                    <!--     Date Section     -->
+                    <h5 class="left col s12 m4">Date</h5>
+
+                    <!--     Events Section     -->
+                    <div class="col s12 m8">
+                        <p></p>
+                        <h6 style="display: inline;padding-right: 20px">Title</h6>
+                        <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p><p></p>
+                        <div>
+                            <button id="buy" class="btn waves-effect waves-light">
+                                Buy
+                                <i class="material-icons right">add_shopping_cart</i>
+                            </button>
+                            <button id="done" style="display:none" class="btn disabled">
+                                <i class="material-icons teal-text right">done</i>
+                            </button>
+                            <button id="unauthorized" style="display:none" class="btn disabled">
+                                <i class="material-icons teal-text right">cancel</i>
+                            </button>
+                            <h8 id="availability" class="teal-text">BOH</h8>
+                        </div>
+                        <p></p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Who made this</h5>
+                    <p class="grey-text text-lighten-4">I'm a CS student, passionate about developement and networking, security and embedded systems.<br>This is my assignment for the Hypermedia Applications (web and multimedia) course at Politecnico di Milano.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="mailto:giuseppe.lonardoni@mail.polimi.it">e-mail</a></li>
+                        <li><a class="white-text" href="https://github.com/96Octavian">Github</a></li>
+                        <li><a class="white-text" href="https://www.linkedin.com/in/giuseppe-lonardoni">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made thanks to <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!--    Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+
 </body>
 </html>
