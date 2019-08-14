@@ -16,11 +16,11 @@ host: "localhost"
 basePath: "/v2"
 tags:
 - name: "event"
-  description: "Operations about user"
+  description: "Operations about events"
 - name: "performer"
-  description: "Operations about user"
+  description: "Operations about performers"
 - name: "user"
-  description: "Operations about user"
+  description: "Operations about users"
 schemes:
 - "http"
 paths:

@@ -52,6 +52,9 @@
     <Content Include="www\css\materialize.css" />
     <Content Include="www\css\materialize.min.css" />
     <Content Include="www\css\style.css" />
+    <Content Include="www\event.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="www\events.html">
       <SubType>Code</SubType>
     </Content>
@@ -61,6 +64,9 @@
     <Content Include="www\js\init.js" />
     <Content Include="www\js\materialize.js" />
     <Content Include="www\js\materialize.min.js" />
+    <Content Include="www\performers.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="www\statics\icons\android-chrome-192x192.png" />
     <Content Include="www\statics\icons\android-chrome-512x512.png" />
     <Content Include="www\statics\icons\apple-touch-icon.png" />

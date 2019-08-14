@@ -1,5 +1,6 @@
 // TODO: Wrap events in events.html
 // TODO: Better spacing in events.html
+// TODO: performer.html is for both artist and company
 'use strict';
 
 var fs = require( 'fs' ),
@@ -7,6 +8,7 @@ var fs = require( 'fs' ),
 	http = require( 'http' );
 
 var app = require( 'connect' )();
+var morgan = require( 'morgan' );
 var swaggerTools = require( 'swagger-tools' );
 var jsyaml = require( 'js-yaml' );
 var serverPort = process.env.PORT || 8080;
@@ -25,6 +27,10 @@ var options = {
 var spec = fs.readFileSync( path.join( __dirname, 'api/swagger.yaml' ), 'utf8' );
 var swaggerDoc = jsyaml.safeLoad( spec );
 
+var serving = serveStatic( __dirname + "/www" );
+
+app.use( morgan( 'common' ) );
+
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 
@@ -40,11 +46,16 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 	// Serve the Swagger documents and Swagger UI
 	app.use( middleware.swaggerUi() );
 
-	app.use( ( req, res, next ) => {
-		console.log( "\nRequest: " + req.url ); next();
+	// Modify the URL
+	app.use( function ( req, res, next ) {
+		if ( req.url.includes( "materialize.js" ) ) req.url = "/js/materialize.js";
+		if ( req.url.includes( "init.js" ) ) req.url = "/js/init.js";
+		if ( req.url.includes( "performers/" ) && !req.url.includes( "byevent" ) ) {
+			req.url = "performers.html";
+		}
+		serving( req, res, next );
+		//console.log( "Modified URL: " + req.url );
 	} );
-
-	app.use( serveStatic( __dirname + "/www" ) );
 
 	// Start the server
 	setupDataLayer().then( () => {

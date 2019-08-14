@@ -1,22 +1,24 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	
-	<link rel="apple-touch-icon" sizes="180x180" href="/statics/icons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/statics/icons/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/statics/icons/favicon-16x16.png">
-	<link rel="manifest" href="/statics/icons/site.webmanifest">
-	<link rel="mask-icon" href="/statics/icons/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#da532c">
- 
-	<meta name="theme-color" content="#ffffff">    <title>Festival</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<!-- CSS    -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/statics/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/statics/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/statics/icons/favicon-16x16.png">
+    <link rel="manifest" href="/statics/icons/site.webmanifest">
+    <link rel="mask-icon" href="/statics/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+
+    <meta name="theme-color" content="#ffffff">
+    <title>Your bookshelf</title>
+
+    <!-- CSS    -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
 </head>
 <body>
     <!-- #region navbar  -->
@@ -67,15 +69,35 @@
 
     <!-- #endregion  -->
 
-    <div id="index-banner" class="parallax-container">
-        <div class="section no-pad-bot">
-            <div class="container">
-                <br><br>
-                <h1 class="header center materialize-red-text text-darken-1">Festival</h1>
-                <div class="row center">
-                    <h5 class="header col s12 light materialize-red-text text-darken-4" style="font-weight: bold">Lots of events!</h5>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+
+                <h5 id="performer" class="left col s12 m12">Name</h5>
+                <h8 id="affiliation" class="left col s12 m12">Affiliation</h8>
+
+                <div style="float: left; padding-top: 2em">
+                    <!--     Cover Section     -->
+                    <div class="col s6 m4">
+                        <button id="buy" class="btn waves-effect waves-light">
+                            Buy
+                            <i class="material-icons right">add_shopping_cart</i>
+                        </button>
+                        <button id="done" style="display:none" class="btn disabled">
+                            <i class="material-icons teal-text right">done</i>
+                        </button>
+                        <button id="unauthorized" style="display:none" class="btn disabled">
+                            <i class="material-icons teal-text right">cancel</i>
+                        </button>
+                        <h8 id="availability" class="teal-text">BOH</h8>
+                    </div>
+
+                    <!--     Summary Section     -->
+                    <div class="col s12 m8">
+                        <p id="plot">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+                    </div>
+
                 </div>
-                <br><br>
 
             </div>
         </div>
