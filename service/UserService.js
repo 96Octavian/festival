@@ -1,5 +1,23 @@
 'use strict';
 
+let sqlDb;
+
+exports.usersDbSetup = function ( database ) {
+	sqlDb = database;
+	console.log( "Checking if Users table exists" );
+	return database.schema.hasTable( "Users" ).then( exists => {
+		if ( !exists ) {
+			console.log( "It doesn't so we create it" );
+			return database.schema.createTable( "Users", table => {
+				table.increments();
+				table.integer( "UserID" );
+				table.text( "Name" );
+				table.text( "Password" );
+			} );
+		}
+		else console.log( "Users table exists" );
+	} );
+};
 
 /**
  * Find user by username

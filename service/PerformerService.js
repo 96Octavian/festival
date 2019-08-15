@@ -1,5 +1,39 @@
 'use strict';
 
+let sqlDb;
+
+exports.artistsDbSetup = function ( database ) {
+	sqlDb = database;
+	console.log( "Checking if Artists table exists" );
+	return database.schema.hasTable( "Artists" ).then( exists => {
+		if ( !exists ) {
+			console.log( "It doesn't so we create it" );
+			return database.schema.createTable( "Artists", table => {
+				table.increments();
+				table.integer( "ArtistID" );
+				table.text( "Name" );
+				table.text( "Achievements" );
+			} );
+		}
+		else console.log( "Artists table exists" );
+	} );
+};
+
+exports.companiesDbSetup = function ( database ) {
+	sqlDb = database;
+	console.log( "Checking if Companies table exists" );
+	return database.schema.hasTable( "Companies" ).then( exists => {
+		if ( !exists ) {
+			console.log( "It doesn't so we create it" );
+			return database.schema.createTable( "Companies", table => {
+				table.increments();
+				table.integer( "CompanyID" );
+				table.text( "Name" );
+			} );
+		}
+		else console.log( "Company table exists" );
+	} );
+};
 
 /**
  * Find a performer by event

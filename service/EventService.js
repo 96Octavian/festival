@@ -28,8 +28,9 @@ exports.eventsDbSetup = function ( database ) {
  * returns List
  **/
 exports.getCalendar = function ( offset, limit ) {
-	return sqlDb( "Events" )
-		.limit( limit || 20 )
+	return sqlDb( "Calendar" )
+		.distinct( "Date" )
+		.limit( limit )
 		.offset( offset )
 	//return new Promise( function ( resolve, reject ) {
 	//	var examples = {};

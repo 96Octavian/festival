@@ -74,82 +74,7 @@
             <h3 class="left col s12 m12">Calendar</h3>
         </div>
         <div class="section">
-            <div class="row">
-
-                <div>
-                    <!--     Date Section     -->
-                    <h5 class="left col s12 m4">Date</h5>
-
-                    <!--     Events Section     -->
-                    <div class="col s12 m8">
-                        <p></p>
-                        <h6 style="display: inline;padding-right: 20px">Title</h6>
-                        <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p><p></p>
-                        <div>
-                            <button id="buy" class="btn waves-effect waves-light">
-                                Buy
-                                <i class="material-icons right">add_shopping_cart</i>
-                            </button>
-                            <button id="done" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">done</i>
-                            </button>
-                            <button id="unauthorized" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">cancel</i>
-                            </button>
-                            <h8 id="availability" class="teal-text">BOH</h8>
-                        </div>
-                        <p></p>
-                        <p></p>
-                        <h6 style="display: inline;padding-right: 20px">Title</h6>
-                        <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p><p></p>
-                        <div>
-                            <button id="buy" class="btn waves-effect waves-light">
-                                Buy
-                                <i class="material-icons right">add_shopping_cart</i>
-                            </button>
-                            <button id="done" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">done</i>
-                            </button>
-                            <button id="unauthorized" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">cancel</i>
-                            </button>
-                            <h8 id="availability" class="teal-text">BOH</h8>
-                        </div>
-                        <p></p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="divider"></div>
-            <div class="row">
-                <div>
-                    <!--     Date Section     -->
-                    <h5 class="left col s12 m4">Date</h5>
-
-                    <!--     Events Section     -->
-                    <div class="col s12 m8">
-                        <p></p>
-                        <h6 style="display: inline;padding-right: 20px">Title</h6>
-                        <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p><p></p>
-                        <div>
-                            <button id="buy" class="btn waves-effect waves-light">
-                                Buy
-                                <i class="material-icons right">add_shopping_cart</i>
-                            </button>
-                            <button id="done" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">done</i>
-                            </button>
-                            <button id="unauthorized" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">cancel</i>
-                            </button>
-                            <h8 id="availability" class="teal-text">BOH</h8>
-                        </div>
-                        <p></p>
-                    </div>
-
-                </div>
-
-            </div>
+            <div></div>
         </div>
     </div>
 
@@ -194,6 +119,73 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
+    <template id="template-event">
+        <p></p>
+        <h6 style="display: inline;padding-right: 20px">Title</h6>
+        <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+        <p></p>
+        <div>
+            <button id="buy" class="btn waves-effect waves-light">
+                Buy
+                <i class="material-icons right">add_shopping_cart</i>
+            </button>
+            <button id="done" style="display:none" class="btn disabled">
+                <i class="material-icons teal-text right">done</i>
+            </button>
+            <button id="unauthorized" style="display:none" class="btn disabled">
+                <i class="material-icons teal-text right">cancel</i>
+            </button>
+            <h8 id="availability" class="teal-text">BOH</h8>
+        </div>
+        <p></p>
+    </template>
+    <template id="template-row">
+        <div>
+            <div class="row">
+                <div>
+                    <!--     Date Section     -->
+                    <h5 class="left col s12 m4">Date</h5>
+
+                    <!--     Events Section     -->
+                    <div id="event" class="col s12 m8">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="divider"></div>
+        </div>
+    </template>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.open( "GET", "/v2/events" );
+        xhr.onload = function () {
+            if ( this.responseText == 0 ) {
+                console.log( "Server DB empy response" );
+            }
+            else {
+
+                let days_array = JSON.parse( this.responseText );
+                for ( let i = 0; i < days_array.length; i++ ) {
+                    let temp = document.getElementById( "template-row" );
+                    let day = temp.content.cloneNode( true );
+                    day = day.firstElementChild;
+                    console.log( days_array[i].Date );
+                    day.setAttribute( "id", days_array[i].Date );
+                    day.querySelector( "h5" ).innerHTML = days_array[i].Date;
+                    let eElement = document.getElementsByClassName( "section" )[0];
+                    eElement.insertBefore( day, eElement.firstChild );
+                }
+                
+
+                /////////////
+                //var temp = document.getElementById( "template-event" );
+                //day.querySelector( "#event" ).appendChild( temp.content.cloneNode( true ) );
+                ////////////
+            }
+        }
+        xhr.send();
+    </script>
 
 </body>
 </html>
