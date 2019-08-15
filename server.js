@@ -53,6 +53,9 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 		if ( req.url.includes( "performers/" ) && !req.url.includes( "byevent" ) ) {
 			req.url = "performers.html";
 		}
+		if ( req.url.includes( "bytype/" ) ) {
+			req.url = "types.html";
+		}
 		serving( req, res, next );
 		//console.log( "Modified URL: " + req.url );
 	} );

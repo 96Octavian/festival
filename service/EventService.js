@@ -64,27 +64,41 @@ exports.getCalendar = function ( offset, limit ) {
  * returns List
  **/
 exports.getEventByDate = function ( date ) {
-	return new Promise( function ( resolve, reject ) {
-		var examples = {};
-		examples['application/json'] = [{
-			"fact": "fact",
-			"id": 0,
-			"abstract": "abstract",
-			"type": {},
-			"gallery": "gallery"
-		}, {
-			"fact": "fact",
-			"id": 0,
-			"abstract": "abstract",
-			"type": {},
-			"gallery": "gallery"
-		}];
-		if ( Object.keys( examples ).length > 0 ) {
-			resolve( examples[Object.keys( examples )[0]] );
-		} else {
-			resolve();
-		}
-	} );
+	return sqlDb( "Calendar" )
+		.select( 'EventID' )
+		.where( 'Date', date )
+		.then( rows => {
+			let ids = []
+			let lista = JSON.stringify( rows, null, 2 );
+			lista = ( JSON.parse( lista ) );
+			for ( let i = 0; i < lista.length; i++ ) {
+				ids.push( lista[i].EventID );
+			}
+			console.log( ids + " (" + typeof ( ids ) + ")" );
+			return sqlDb( "Events" )
+				.whereIn( 'EventID', ids );
+		} )
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = [{
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}, {
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}];
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
 }
 
 
@@ -186,15 +200,29 @@ exports.getEventBySeminar = function ( seminarID ) {
  * returns List
  **/
 exports.getEventByType = function ( type ) {
-	return new Promise( function ( resolve, reject ) {
-		var examples = {};
-		examples['application/json'] = ["", ""];
-		if ( Object.keys( examples ).length > 0 ) {
-			resolve( examples[Object.keys( examples )[0]] );
-		} else {
-			resolve();
-		}
-	} );
+	return sqlDb( "TypeToEvent" )
+		.select( 'EventID' )
+		.where( 'Type', type )
+		.then( rows => {
+			let ids = []
+			let lista = JSON.stringify( rows, null, 2 );
+			lista = ( JSON.parse( lista ) );
+			for ( let i = 0; i < lista.length; i++ ) {
+				ids.push( lista[i].EventID );
+			}
+			console.log( ids + " (" + typeof ( ids ) + ")" );
+			return sqlDb( "Events" )
+				.whereIn( 'EventID', ids );
+		} )
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = ["", ""];
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
 }
 
 

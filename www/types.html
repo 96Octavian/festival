@@ -139,74 +139,29 @@
                 <h8 id="availability" class="teal-text">BOH</h8>
             </div>
             <p></p>
-        </div>
-    </template>
-    <template id="template-row">
-        <div>
-            <div class="row">
-                <div>
-                    <!--     Date Section     -->
-                    <h5 class="left col s12 m4">Date</h5>
-
-                    <!--     Events Section     -->
-                    <div id="event" class="col s12 m8">
-
-                    </div>
-
-                </div>
-            </div>
             <div class="divider"></div>
         </div>
     </template>
     <script>
-        let eventer = function ( date ) {
-            let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/bydate/" + date );
-            xhr.onload = function () {
-                if ( this.responseText == 0 ) {
-                    console.log( "Server DB empy response" );
-                }
-                else {
-                    let events_array = JSON.parse( this.responseText );
-                    for ( let i = 0; i < events_array.length; i++ ) {
-                        let temp = document.getElementById( "template-event" );
-                        let event = temp.content.cloneNode( true );
-                        event = event.firstElementChild;
-                        event.setAttribute( "id", events_array[i].Title );
-                        event.querySelector( "h6" ).innerHTML = events_array[i].Title;
-                        event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
-                        document.getElementById( date ).querySelector( "#event" ).appendChild( event );
-                    }
-                }
-            }
-            xhr.send();
-        }
+        let type = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
         let xhr = new XMLHttpRequest();
-        xhr.open( "GET", "/v2/events" );
+        xhr.open( "GET", "/v2/events/bytype/" + type );
         xhr.onload = function () {
             if ( this.responseText == 0 ) {
                 console.log( "Server DB empy response" );
             }
             else {
-                //console.log( this.responseText + " (" + typeof ( this.responseText ) + ")" );
-                let days_array = JSON.parse( this.responseText );
-                for ( let i = 0; i < days_array.length; i++ ) {
-                    let temp = document.getElementById( "template-row" );
-                    let day = temp.content.cloneNode( true );
-                    day = day.firstElementChild;
-                    console.log( days_array[i].Date );
-                    day.setAttribute( "id", days_array[i].Date );
-                    day.querySelector( "h5" ).innerHTML = days_array[i].Date;
+                let events_array = JSON.parse( this.responseText );
+                for ( let i = 0; i < events_array.length; i++ ) {
+                    let temp = document.getElementById( "template-event" );
+                    let event = temp.content.cloneNode( true );
+                    event = event.firstElementChild;
+                    event.setAttribute( "id", events_array[i].Title );
+                    event.querySelector( "h6" ).innerHTML = events_array[i].Title;
+                    event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
                     let eElement = document.getElementsByClassName( "section" )[0];
-                    eElement.insertBefore( day, eElement.firstChild );
-                    eventer( days_array[i].Date );
+                    eElement.insertBefore( event, eElement.firstChild );
                 }
-
-
-                /////////////
-                //var temp = document.getElementById( "template-event" );
-                //day.querySelector( "#event" ).appendChild( temp.content.cloneNode( true ) );
-                ////////////
             }
         }
         xhr.send();
