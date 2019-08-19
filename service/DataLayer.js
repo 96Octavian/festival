@@ -11,10 +11,10 @@ let sqlDb = sqlDbFactory( {
 		user: "postgres",
 		password: "admin",
 		database: "festival",
-		debug: true
+		debug: false
 	},
 	ssl: true,
-	debug: true
+	debug: false
 } );
 
 function setupDataLayer() {

@@ -49,6 +49,9 @@
     <Content Include="service\PerformerService.js" />
     <Content Include="service\UserService.js" />
     <Content Include="utils\writer.js" />
+    <Content Include="www\affiliation.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="www\css\materialize.css" />
     <Content Include="www\css\materialize.min.css" />
     <Content Include="www\css\style.css" />

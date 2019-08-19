@@ -74,7 +74,7 @@
             <div class="row">
 
                 <h5 id="title" class="left col s12 m12">Titolo</h5>
-                <h8 id="author" class="left col s12 m12">Performer</h8>
+                <h8 id="author" class="left col s12 m12"><a style="text-decoration: none; color: inherit;" href="#">Performer</a></h8>
 
                 <div style="float: left; padding-top: 2em">
                     <!--     Cover Section     -->
@@ -144,6 +144,59 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
+
+    <script>
+
+        let EventToArtist = function ( EventID ) {
+            let id = new XMLHttpRequest();
+            id.open( "GET", "/v2/performers/byevent/" + EventID );
+            id.onload = function () {
+                if ( this.responseText == 0 ) {
+                    console.log( "Server DB empy response" );
+                }
+                else {
+                    let id = JSON.parse( this.responseText )[0];
+                    console.log( "ArtistID: " + id.ArtistID );
+                    Performer( id.ArtistID );
+                }
+            }
+            id.send();
+        }
+
+        let Performer = function ( ArtistID ) {
+            let performer = new XMLHttpRequest();
+            performer.open( "GET", "/v2/performers/" + ArtistID );
+            performer.onload = function () {
+                if ( this.responseText == 0 ) {
+                    console.log( "Server DB empy response" );
+                }
+                else {
+                    let artist = JSON.parse( this.responseText )[0];
+                    document.getElementById( "author" ).querySelector("a").innerHTML = artist.Name;
+                    document.getElementById( "author" ).querySelector("a").setAttribute( "href", "/performers/" + artist.ArtistID );
+
+                }
+            }
+            performer.send();
+        }
+
+        let EventID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
+        let event = new XMLHttpRequest();
+        event.open( "GET", "/v2/events/" + EventID );
+        event.onload = function () {
+            if ( this.responseText == 0 ) {
+                console.log( "Server DB empy response" );
+            }
+            else {
+                let event = JSON.parse( this.responseText )[0];
+                let ArtistID = EventToArtist( EventID );
+                document.getElementById( "title" ).innerHTML = event.Title;
+                document.getElementById( "plot" ).innerHTML = event.Abstract;
+            }
+        }
+        event.send();
+    </script>
+
 
 </body>
 </html>

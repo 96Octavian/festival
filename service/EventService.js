@@ -110,21 +110,23 @@ exports.getEventByDate = function ( date ) {
  * returns Event
  **/
 exports.getEventById = function ( eventID ) {
-	return new Promise( function ( resolve, reject ) {
-		var examples = {};
-		examples['application/json'] = {
-			"fact": "fact",
-			"id": 0,
-			"abstract": "abstract",
-			"type": {},
-			"gallery": "gallery"
-		};
-		if ( Object.keys( examples ).length > 0 ) {
-			resolve( examples[Object.keys( examples )[0]] );
-		} else {
-			resolve();
-		}
-	} );
+	return sqlDb( "Events" )
+		.where( 'EventID', eventID );
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = {
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	};
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
 }
 
 

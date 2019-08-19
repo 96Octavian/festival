@@ -42,18 +42,61 @@ exports.companiesDbSetup = function ( database ) {
  * eventID Long ID of event to return
  * returns List
  **/
-exports.getPerformerByEvent = function(eventID) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ "", "" ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.getPerformerByEvent = function ( eventID ) {
+	return sqlDb( "EventToArtist" )
+		.where( 'EventID', eventID );
+  //return new Promise(function(resolve, reject) {
+  //  var examples = {};
+  //  examples['application/json'] = [ "", "" ];
+  //  if (Object.keys(examples).length > 0) {
+  //    resolve(examples[Object.keys(examples)[0]]);
+  //  } else {
+  //    resolve();
+  //  }
+  //});
 }
 
+/**
+ * Find a performer by company
+ * Returns performers
+ *
+ * companyID Long ID of event to return
+ * returns List
+ **/
+exports.getPerformerByCompany = function ( companyID ) {
+	return sqlDb( "ArtistToCompany" )
+		.where( 'CompanyID', companyID );
+	//return new Promise(function(resolve, reject) {
+	//  var examples = {};
+	//  examples['application/json'] = [ "", "" ];
+	//  if (Object.keys(examples).length > 0) {
+	//    resolve(examples[Object.keys(examples)[0]]);
+	//  } else {
+	//    resolve();
+	//  }
+	//});
+}
+
+/**
+ * Find a performer by artist
+ * Returns performers
+ *
+ * artistID Long ID of event to return
+ * returns List
+ **/
+exports.getPerformerByArtist = function ( artistID ) {
+	return sqlDb( "ArtistToCompany" )
+		.where( 'ArtistID', artistID );
+	//return new Promise(function(resolve, reject) {
+	//  var examples = {};
+	//  examples['application/json'] = [ "", "" ];
+	//  if (Object.keys(examples).length > 0) {
+	//    resolve(examples[Object.keys(examples)[0]]);
+	//  } else {
+	//    resolve();
+	//  }
+	//});
+}
 
 /**
  * Find a performer by ID
@@ -62,16 +105,22 @@ exports.getPerformerByEvent = function(eventID) {
  * performerID Long ID of performer to return
  * returns Object
  **/
-exports.getPerformerById = function(performerID) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.getPerformerById = function ( performerID ) {
+	if ( String( performerID ).charAt( 0 ) == '1' ) {
+		return sqlDb( "Artists" )
+			.where( 'ArtistID', performerID );
+	}
+	else return sqlDb( "Companies" )
+		.where( 'CompanyID', performerID );
+  //return new Promise(function(resolve, reject) {
+  //  var examples = {};
+  //  examples['application/json'] = "";
+  //  if (Object.keys(examples).length > 0) {
+  //    resolve(examples[Object.keys(examples)[0]]);
+  //  } else {
+  //    resolve();
+  //  }
+  //});
 }
 
 

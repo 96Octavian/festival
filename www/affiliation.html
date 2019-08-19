@@ -71,7 +71,7 @@
 
     <div class="container">
         <div class="row">
-            <h3 class="left col s12 m12">Calendar</h3>
+            <h3 class="left col s12 m12">Performers</h3>
         </div>
         <div class="section">
             <div></div>
@@ -122,7 +122,7 @@
     <template id="template-event">
         <div>
             <p></p>
-            <a href="" style="text-decoration: none; color: inherit;"><h6 style="display: inline;padding-right: 20px">Title</h6></a>
+            <h6 style="display: inline;padding-right: 20px">Title</h6>
             <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
             <p></p>
             <div>
@@ -139,70 +139,69 @@
                 <h8 id="availability" class="teal-text">BOH</h8>
             </div>
             <p></p>
-        </div>
-    </template>
-    <template id="template-row">
-        <div>
-            <div class="row">
-                <div>
-                    <!--     Date Section     -->
-                    <h5 class="left col s12 m4">Date</h5>
-
-                    <!--     Events Section     -->
-                    <div id="event" class="col s12 m8">
-
-                    </div>
-
-                </div>
-            </div>
             <div class="divider"></div>
         </div>
     </template>
     <script>
-        let eventer = function ( date ) {
-            let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/bydate/" + date );
-            xhr.onload = function () {
+        // TODO: Show on title who are these affiliated to
+        let Actual = function ( ID ) {
+            let actual = new XMLHttpRequest();
+            actual.open( "GET", "/v2/performers/" + ID );
+            actual.onload = function () {
                 if ( this.responseText == 0 ) {
                     console.log( "Server DB empy response" );
                 }
                 else {
-                    let events_array = JSON.parse( this.responseText );
-                    for ( let i = 0; i < events_array.length; i++ ) {
+                    let performers_array = JSON.parse( this.responseText );
+                    for ( let i = 0; i < performers_array.length; i++ ) {
                         let temp = document.getElementById( "template-event" );
                         let event = temp.content.cloneNode( true );
                         event = event.firstElementChild;
-                        event.setAttribute( "id", events_array[i].Title );
-                        event.querySelector( "h6" ).innerHTML = events_array[i].Title;
-                        event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
-                        event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
-                        document.getElementById( date ).querySelector( "#event" ).appendChild( event );
+                        event.setAttribute( "id", performers_array[i].Name );
+                        event.querySelector( "h6" ).innerHTML = performers_array[i].Name;
+                        event.querySelector( "#plot" ).innerHTML = performers_array[i].Achievements;
+                        let eElement = document.getElementsByClassName( "section" )[0];
+                        // TODO: set link
+                        eElement.insertBefore( event, eElement.firstChild );
                     }
                 }
             }
-            xhr.send();
+            actual.send();
         }
+
+        let PerformerID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
         let xhr = new XMLHttpRequest();
-        xhr.open( "GET", "/v2/events" );
+        let addr = "";
+        if ( String( PerformerID ).charAt( 0 ) == '1' ) {
+            addr = "/v2/performers/byartist/" + PerformerID;
+        }
+        else {
+            addr = "/v2/performers/bycompany/" + PerformerID;
+        }
+        xhr.open( "GET", addr );
         xhr.onload = function () {
             if ( this.responseText == 0 ) {
                 console.log( "Server DB empy response" );
             }
             else {
-                //console.log( this.responseText + " (" + typeof ( this.responseText ) + ")" );
-                let days_array = JSON.parse( this.responseText );
-                for ( let i = 0; i < days_array.length; i++ ) {
-                    let temp = document.getElementById( "template-row" );
-                    let day = temp.content.cloneNode( true );
-                    day = day.firstElementChild;
-                    console.log( days_array[i].Date );
-                    day.setAttribute( "id", days_array[i].Date );
-                    day.querySelector( "h5" ).innerHTML = days_array[i].Date;
-                    let eElement = document.getElementsByClassName( "section" )[0];
-                    eElement.insertBefore( day, eElement.firstChild );
-                    eventer( days_array[i].Date );
-                }
+                let performers_array = JSON.parse( this.responseText );
+                for ( let i = 0; i < performers_array.length; i++ ) {
+                    //let temp = document.getElementById( "template-event" );
+                    //let event = temp.content.cloneNode( true );
+                    //event = event.firstElementChild;
+                    //event.setAttribute( "id", performers_array[i].Name );
+                    //event.querySelector( "h6" ).innerHTML = performers_array[i].Name;
+                    //event.querySelector( "#plot" ).innerHTML = performers_array[i].Achievements;
+                    //let eElement = document.getElementsByClassName( "section" )[0];
+                    //eElement.insertBefore( event, eElement.firstChild );
+                    if ( String( PerformerID ).charAt( 0 ) == '2' ) {
+                        Actual( performers_array[i].ArtistID );
+                    }
+                    else {
+                        Actual( performers_array[i].CompanyID );
+                    }
 
+                }
             }
         }
         xhr.send();

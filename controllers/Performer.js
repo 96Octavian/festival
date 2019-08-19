@@ -14,6 +14,29 @@ module.exports.getPerformerByEvent = function getPerformerByEvent (req, res, nex
     });
 };
 
+module.exports.getPerformerByCompany = function getPerformerByCompany( req, res, next ) {
+	var companyID = req.swagger.params['companyID'].value;
+	Performer.getPerformerByCompany( companyID )
+		.then( function ( response ) {
+			utils.writeJson( res, response );
+		} )
+		.catch( function ( response ) {
+			utils.writeJson( res, response );
+		} );
+};
+
+module.exports.getPerformerByArtist = function getPerformerByArtist( req, res, next ) {
+	var artistID = req.swagger.params['artistID'].value;
+	Performer.getPerformerByArtist( artistID )
+		.then( function ( response ) {
+			utils.writeJson( res, response );
+		} )
+		.catch( function ( response ) {
+			utils.writeJson( res, response );
+		} );
+};
+
+
 module.exports.getPerformerById = function getPerformerById (req, res, next) {
   var performerID = req.swagger.params['performerID'].value;
   Performer.getPerformerById(performerID)

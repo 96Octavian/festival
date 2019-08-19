@@ -74,7 +74,7 @@
             <div class="row">
 
                 <h5 id="performer" class="left col s12 m12">Name</h5>
-                <h8 id="affiliation" class="left col s12 m12">Affiliation</h8>
+                <h8 id="affiliation" class="left col s12 m12"><a style="text-decoration: none; color: inherit;" href="#">Affiliation</a></h8>
 
                 <div style="float: left; padding-top: 2em">
                     <!--     Cover Section     -->
@@ -144,6 +144,46 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
+
+    <script>
+
+        let ArtistToCompany = function ( PerformerID ) {
+            let id = new XMLHttpRequest();
+            id.open( "GET", "/v2/performers/" + PerformerID );
+            id.onload = function () {
+                if ( this.responseText == 0 ) {
+                    console.log( "Server DB empy response" );
+                }
+                else {
+                    let id = JSON.parse( this.responseText )[0];
+                    console.log( "id.ArtistID: " + id.ArtistID );
+                    console.log( "PageID: " + PerformerID );
+                    console.log( "id.CompanyID: " + id.CompanyID );
+                    console.log( "id.ArtistID != PerformerID: " + id.ArtistID != PerformerID );
+                    document.getElementById( "affiliation" ).querySelector( "a" ).setAttribute( "href", "/performers/" + id.ArtistID != PerformerID ? id.ArtistID : id.CompanyID );
+                }
+            }
+            id.send();
+        }
+
+        let ArtistID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
+        let artist = new XMLHttpRequest();
+        artist.open( "GET", "/v2/performers/" + ArtistID );
+        artist.onload = function () {
+            if ( this.responseText == 0 ) {
+                console.log( "Server DB empy response" );
+            }
+            else {
+                let performer = JSON.parse( this.responseText )[0];
+                document.getElementById( "performer" ).innerHTML = performer.Name;
+                document.getElementById( "plot" ).innerHTML = performer.Achievements;
+                //ArtistToCompany( ArtistID );
+                document.getElementById( "affiliation" ).querySelector("a").setAttribute( "href", "/affiliation/" + ArtistID );
+            }
+        }
+        artist.send();
+
+    </script>
 
 </body>
 </html>

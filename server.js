@@ -50,11 +50,18 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 	app.use( function ( req, res, next ) {
 		if ( req.url.includes( "materialize.js" ) ) req.url = "/js/materialize.js";
 		if ( req.url.includes( "init.js" ) ) req.url = "/js/init.js";
-		if ( req.url.includes( "performers/" ) && !req.url.includes( "byevent" ) ) {
+		if ( req.url.includes( "performers/" ) && !req.url.includes( "by" ) ) {
+			console.log( "COLPA TUA" );
 			req.url = "performers.html";
+		}
+		if ( req.url.match( /^\/events\/([0-9]+)$/ ) ) {
+			req.url = "event.html";
 		}
 		if ( req.url.includes( "bytype/" ) ) {
 			req.url = "types.html";
+		}
+		if ( req.url.match( /^\/affiliation\/([0-9]+)$/ ) ) {
+			req.url = "affiliation.html";
 		}
 		serving( req, res, next );
 		//console.log( "Modified URL: " + req.url );
