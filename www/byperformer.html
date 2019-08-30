@@ -84,7 +84,7 @@
     <main>
         <div class="container">
             <div class="row">
-                <h3 id="type" class="left col s12 m12">Calendar</h3>
+                <h3 id="type" class="left col s12 m12">Featuring in</h3>
             </div>
             <div class="section">
                 <div></div>
@@ -144,10 +144,9 @@
         </div>
     </template>
     <script>
-        let type = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
-        document.getElementById( "type" ).innerHTML = type;
+        let ArtistID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
         let xhr = new XMLHttpRequest();
-        xhr.open( "GET", "/v2/events/bytype/" + type );
+        xhr.open( "GET", "/v2/events/byperformer/" + ArtistID );
         xhr.onload = function () {
             if ( this.responseText == 0 ) {
                 console.log( "Server DB empy response" );

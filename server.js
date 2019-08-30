@@ -62,6 +62,10 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 		if ( req.url.match( /^\/affiliation\/([0-9]+)$/ ) ) {
 			req.url = "affiliation.html";
 		}
+		if ( req.url.includes( "byperformer/" ) ) {
+			req.url = "byperformer.html";
+		}
+
 		serving( req, res, next );
 		//console.log( "Modified URL: " + req.url );
 	} );

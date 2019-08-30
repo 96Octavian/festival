@@ -135,22 +135,10 @@
     <template id="template-event">
         <div>
             <p></p>
-            <h6 style="display: inline;padding-right: 20px">Title</h6>
+            <a style="text-decoration: none; color: inherit;" href="#">
+                <h6 style="display: inline;padding-right: 20px">Title</h6>
+            </a>
             <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
-            <p></p>
-            <div>
-                <button id="buy" class="btn waves-effect waves-light">
-                    Buy
-                    <i class="material-icons right">add_shopping_cart</i>
-                </button>
-                <button id="done" style="display:none" class="btn disabled">
-                    <i class="material-icons teal-text right">done</i>
-                </button>
-                <button id="unauthorized" style="display:none" class="btn disabled">
-                    <i class="material-icons teal-text right">cancel</i>
-                </button>
-                <h8 id="availability" class="teal-text">BOH</h8>
-            </div>
             <p></p>
             <div class="divider"></div>
         </div>
@@ -174,7 +162,7 @@
                         event.querySelector( "h6" ).innerHTML = performers_array[i].Name;
                         event.querySelector( "#plot" ).innerHTML = performers_array[i].Achievements;
                         let eElement = document.getElementsByClassName( "section" )[0];
-                        // TODO: set link
+                        event.querySelector( "a" ).setAttribute( "href", "/performers/" + ID );
                         eElement.insertBefore( event, eElement.firstChild );
                     }
                 }

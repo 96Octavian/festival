@@ -92,17 +92,10 @@
                     <div style="float: left; padding-top: 2em">
                         <!--     Cover Section     -->
                         <div class="col s6 m4">
-                            <button id="buy" class="btn waves-effect waves-light">
-                                Buy
-                                <i class="material-icons right">add_shopping_cart</i>
+                            <button id="featured" class="btn waves-effect waves-light" onclick="location.href='/';">
+                                Features in
+                                <i class="material-icons right">keyboard_arrow_right</i>
                             </button>
-                            <button id="done" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">done</i>
-                            </button>
-                            <button id="unauthorized" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">cancel</i>
-                            </button>
-                            <h8 id="availability" class="teal-text">BOH</h8>
                         </div>
 
                         <!--     Summary Section     -->
@@ -192,6 +185,7 @@
                 document.getElementById( "plot" ).innerHTML = performer.Achievements;
                 //ArtistToCompany( ArtistID );
                 document.getElementById( "affiliation" ).querySelector( "a" ).setAttribute( "href", "/affiliation/" + ArtistID );
+                document.getElementsByTagName( "button" )[0].setAttribute( "onclick", "location.href='/events/byperformer/" + ArtistID + "'" );
             }
         }
         artist.send();
