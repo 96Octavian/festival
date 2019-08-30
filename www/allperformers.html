@@ -81,38 +81,14 @@
     </div>
 
     <!-- #endregion  -->
+
     <main>
         <div class="container">
+            <div class="row">
+                <h3 class="left col s12 m12">Artists</h3>
+            </div>
             <div class="section">
-                <div class="row">
-
-                    <h5 id="performer" class="left col s12 m12">Name</h5>
-                    <h8 id="affiliation" class="left col s12 m12"><a style="text-decoration: none; color: inherit;" href="#">Affiliation</a></h8>
-
-                    <div style="float: left; padding-top: 2em">
-                        <!--     Cover Section     -->
-                        <div class="col s6 m4">
-                            <button id="buy" class="btn waves-effect waves-light">
-                                Buy
-                                <i class="material-icons right">add_shopping_cart</i>
-                            </button>
-                            <button id="done" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">done</i>
-                            </button>
-                            <button id="unauthorized" style="display:none" class="btn disabled">
-                                <i class="material-icons teal-text right">cancel</i>
-                            </button>
-                            <h8 id="availability" class="teal-text">BOH</h8>
-                        </div>
-
-                        <!--     Summary Section     -->
-                        <div class="col s12 m8">
-                            <p id="plot">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
-                        </div>
-
-                    </div>
-
-                </div>
+                <div></div>
             </div>
         </div>
 
@@ -157,45 +133,71 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
+    <template id="template-event">
+        <div>
+            <p></p>
+            <a href="" style="text-decoration: none; color: inherit;"><h6 style="display: inline;padding-right: 20px">Title</h6></a>
+            <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+            <p></p>
+            <div>
+                <button id="buy" class="btn waves-effect waves-light">
+                    Buy
+                    <i class="material-icons right">add_shopping_cart</i>
+                </button>
+                <button id="done" style="display:none" class="btn disabled">
+                    <i class="material-icons teal-text right">done</i>
+                </button>
+                <button id="unauthorized" style="display:none" class="btn disabled">
+                    <i class="material-icons teal-text right">cancel</i>
+                </button>
+                <h8 id="availability" class="teal-text">BOH</h8>
+            </div>
+            <p></p>
+        </div>
+    </template>
+    <template id="template-row">
+        <div>
+            <div class="row">
+                <div>
+                    <!--     Name Section     -->
+                    <a href="" style="text-decoration: none; color: inherit;">
+                        <h5 class="left col s12 m4">Name</h5>
+                    </a>
 
+                    <!--     Decription Section     -->
+                    <div id="description" class="col s12 m8">
+                        <p>Vediamo come si presenta questo paragrapho</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="divider"></div>
+        </div>
+    </template>
     <script>
-
-        let ArtistToCompany = function ( PerformerID ) {
-            let id = new XMLHttpRequest();
-            id.open( "GET", "/v2/performers/" + PerformerID );
-            id.onload = function () {
-                if ( this.responseText == 0 ) {
-                    console.log( "Server DB empy response" );
-                }
-                else {
-                    let id = JSON.parse( this.responseText )[0];
-                    console.log( "id.ArtistID: " + id.ArtistID );
-                    console.log( "PageID: " + PerformerID );
-                    console.log( "id.CompanyID: " + id.CompanyID );
-                    console.log( "id.ArtistID != PerformerID: " + id.ArtistID != PerformerID );
-                    document.getElementById( "affiliation" ).querySelector( "a" ).setAttribute( "href", "/performers/" + id.ArtistID != PerformerID ? id.ArtistID : id.CompanyID );
-                }
-            }
-            id.send();
-        }
-
-        let ArtistID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
-        let artist = new XMLHttpRequest();
-        artist.open( "GET", "/v2/performers/" + ArtistID );
-        artist.onload = function () {
+        let xhr = new XMLHttpRequest();
+        xhr.open( "GET", "/v2/performers" );
+        xhr.onload = function () {
             if ( this.responseText == 0 ) {
                 console.log( "Server DB empy response" );
             }
             else {
-                let performer = JSON.parse( this.responseText )[0];
-                document.getElementById( "performer" ).innerHTML = performer.Name;
-                document.getElementById( "plot" ).innerHTML = performer.Achievements;
-                //ArtistToCompany( ArtistID );
-                document.getElementById( "affiliation" ).querySelector( "a" ).setAttribute( "href", "/affiliation/" + ArtistID );
+                let artists_array = JSON.parse( this.responseText );
+                for ( let i = 0; i < artists_array.length; i++ ) {
+                    let temp = document.getElementById( "template-row" );
+                    let artist = temp.content.cloneNode( true );
+                    artist = artist.firstElementChild;
+                    console.log( artists_array[i].Name );
+                    artist.setAttribute( "id", artists_array[i].Name );
+                    artist.querySelector( "a" ).setAttribute( "href", "/performers/" + artists_array[i].ArtistID );
+                    artist.querySelector( "h5" ).innerHTML = artists_array[i].Name;
+                    let eElement = document.getElementsByClassName( "section" )[0];
+                    eElement.insertBefore( artist, eElement.firstChild );
+                }
+
             }
         }
-        artist.send();
-
+        xhr.send();
     </script>
 
 </body>

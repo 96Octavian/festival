@@ -22,6 +22,7 @@
 <body>
     <!-- #region navbar  -->
     <!-- Dropdown Structure -->
+    <!-- Events -->
     <!-- Desktop -->
     <ul id="event-dropdown" class="dropdown-content">
         <li><a href="/events.html">All</a></li>
@@ -41,6 +42,16 @@
         <li><a href="/events/bytype/Seminar">Seminar</a></li>
     </ul>
 
+    <!-- Performers -->
+    <!-- Desktop -->
+    <ul id="performer-dropdown" class="dropdown-content">
+        <li><a href="/allperformers.html">All</a></li>
+    </ul>
+    <!-- Mobile -->
+    <ul id="mobile-performer-dropdown" class="dropdown-content">
+        <li><a href="/allperformers.html">All</a></li>
+    </ul>
+
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">
@@ -52,6 +63,7 @@
                     <!-- Dropdown Trigger -->
                     <!-- // TODO: data-target indica quale id sarà mostrato, in init.js defininiamo la funzione ch lo attiva -->
                     <li><a class="event-dropdown-trigger" href="#" data-target="event-dropdown">Events</a></li>
+                    <li><a class="event-dropdown-trigger" href="#" data-target="performer-dropdown">Artists</a></li>
                 </ul>
 
                 <ul id="nav-mobile" class="sidenav">
@@ -60,6 +72,7 @@
                     <li><a href="#">Navbar Link</a></li>
                     <!-- Dropdown Trigger -->
                     <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-event-dropdown">Events</a></li>
+                    <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-performer-dropdown">Artists</a></li>
                 </ul>
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
@@ -67,33 +80,33 @@
     </div>
 
     <!-- #endregion  -->
-
-    <div id="index-banner" class="parallax-container">
-        <div class="section no-pad-bot">
-            <div class="container">
-                <br><br>
-                <h1 class="center materialize-red-text text-darken-1">Festival</h1>
-                <div class="row center">
-                    <h5 class="header col s12 light materialize-red-text text-darken-4" style="font-weight: bold">Lots of events!</h5>
+    <main>
+        <div id="index-banner" class="parallax-container">
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <br><br>
+                    <h1 class="center coral-text">Festival</h1>
+                    <div class="row center">
+                        <h5 class="header col s12 light materialize-red-text text-darken-4" style="font-weight: bold">Lots of events!</h5>
+                    </div>
+                    <br><br>
                 </div>
-                <br><br>
+            </div>
+            <div class="parallax">
+                <img src="statics/index_background.jpg" alt="Unsplashed background img 1" style="transform: translate3d(50%, -21.1086px, 0px); opacity: 1;">
             </div>
         </div>
-        <div class="parallax">
-            <img src="statics/index_background.jpg" alt="Unsplashed background img 1" style="transform: translate3d(50%, -21.1086px, 0px); opacity: 1;">
-        </div>
-    </div>
-    <div class="container">
-        <h5 class="center">Summer festival</h5>
+        <div class="container">
+            <h5 class="center">Summer festival</h5>
 
-        <p class="light">We gathered events and shows to celebrate the starting of the new farmer year and all that. You'll find amazing performances and performers, as well as events and seminarsfor on each topic you'd be willing to know. Dive in and open your mind!</p>
-    </div>
-    <div class="parallax-container valig-wrapper">
-        <div class="parallax">
-            <img src="statics/index_background.jpg" alt="Unsplashed background img 1" style="transform: translate3d(50%, -21.1086px, 0px); opacity: 1;">
+            <p class="light">We gathered events and shows to celebrate the starting of the new farmer year and all that. You'll find amazing performances and performers, as well as events and seminarsfor on each topic you'd be willing to know. Dive in and open your mind!</p>
         </div>
-    </div>
-
+        <div class="parallax-container valig-wrapper">
+            <div class="parallax">
+                <img src="statics/index_background.jpg" alt="Unsplashed background img 1" style="transform: translate3d(50%, -21.1086px, 0px); opacity: 1;">
+            </div>
+        </div>
+    </main>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
             <ul class="left">

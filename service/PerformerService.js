@@ -132,15 +132,18 @@ exports.getPerformerById = function ( performerID ) {
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.getPerformers = function(offset,limit) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ "", "" ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.getPerformers = function ( offset, limit ) {
+	return sqlDb( "Artists" )
+		.limit( limit )
+		.offset( offset );
+  //return new Promise(function(resolve, reject) {
+  //  var examples = {};
+  //  examples['application/json'] = [ "", "" ];
+  //  if (Object.keys(examples).length > 0) {
+  //    resolve(examples[Object.keys(examples)[0]]);
+  //  } else {
+  //    resolve();
+  //  }
+  //});
 }
 

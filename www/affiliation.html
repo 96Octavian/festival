@@ -23,6 +23,7 @@
 <body>
     <!-- #region navbar  -->
     <!-- Dropdown Structure -->
+    <!-- Events -->
     <!-- Desktop -->
     <ul id="event-dropdown" class="dropdown-content">
         <li><a href="/events.html">All</a></li>
@@ -42,6 +43,16 @@
         <li><a href="/events/bytype/Seminar">Seminar</a></li>
     </ul>
 
+    <!-- Performers -->
+    <!-- Desktop -->
+    <ul id="performer-dropdown" class="dropdown-content">
+        <li><a href="/allperformers.html">All</a></li>
+    </ul>
+    <!-- Mobile -->
+    <ul id="mobile-performer-dropdown" class="dropdown-content">
+        <li><a href="/allperformers.html">All</a></li>
+    </ul>
+
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">
@@ -53,6 +64,7 @@
                     <!-- Dropdown Trigger -->
                     <!-- // TODO: data-target indica quale id sarà mostrato, in init.js defininiamo la funzione ch lo attiva -->
                     <li><a class="event-dropdown-trigger" href="#" data-target="event-dropdown">Events</a></li>
+                    <li><a class="event-dropdown-trigger" href="#" data-target="performer-dropdown">Artists</a></li>
                 </ul>
 
                 <ul id="nav-mobile" class="sidenav">
@@ -61,6 +73,7 @@
                     <li><a href="#">Navbar Link</a></li>
                     <!-- Dropdown Trigger -->
                     <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-event-dropdown">Events</a></li>
+                    <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-performer-dropdown">Artists</a></li>
                 </ul>
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
@@ -68,16 +81,16 @@
     </div>
 
     <!-- #endregion  -->
-
-    <div class="container">
-        <div class="row">
-            <h3 class="left col s12 m12">Performers</h3>
+    <main>
+        <div class="container">
+            <div class="row">
+                <h3 class="left col s12 m12">Performers</h3>
+            </div>
+            <div class="section">
+                <div></div>
+            </div>
         </div>
-        <div class="section">
-            <div></div>
-        </div>
-    </div>
-
+    </main>
 
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">

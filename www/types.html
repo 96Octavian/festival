@@ -23,6 +23,7 @@
 <body>
     <!-- #region navbar  -->
     <!-- Dropdown Structure -->
+    <!-- Events -->
     <!-- Desktop -->
     <ul id="event-dropdown" class="dropdown-content">
         <li><a href="/events.html">All</a></li>
@@ -42,6 +43,16 @@
         <li><a href="/events/bytype/Seminar">Seminar</a></li>
     </ul>
 
+    <!-- Performers -->
+    <!-- Desktop -->
+    <ul id="performer-dropdown" class="dropdown-content">
+        <li><a href="/allperformers.html">All</a></li>
+    </ul>
+    <!-- Mobile -->
+    <ul id="mobile-performer-dropdown" class="dropdown-content">
+        <li><a href="/allperformers.html">All</a></li>
+    </ul>
+
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">
@@ -53,6 +64,7 @@
                     <!-- Dropdown Trigger -->
                     <!-- // TODO: data-target indica quale id sarà mostrato, in init.js defininiamo la funzione ch lo attiva -->
                     <li><a class="event-dropdown-trigger" href="#" data-target="event-dropdown">Events</a></li>
+                    <li><a class="event-dropdown-trigger" href="#" data-target="performer-dropdown">Artists</a></li>
                 </ul>
 
                 <ul id="nav-mobile" class="sidenav">
@@ -61,6 +73,7 @@
                     <li><a href="#">Navbar Link</a></li>
                     <!-- Dropdown Trigger -->
                     <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-event-dropdown">Events</a></li>
+                    <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-performer-dropdown">Artists</a></li>
                 </ul>
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
@@ -68,17 +81,17 @@
     </div>
 
     <!-- #endregion  -->
-
-    <div class="container">
-        <div class="row">
-            <h3 class="left col s12 m12">Calendar</h3>
+    <main>
+        <div class="container">
+            <div class="row">
+                <h3 id="type" class="left col s12 m12">Calendar</h3>
+            </div>
+            <div class="section">
+                <div></div>
+            </div>
         </div>
-        <div class="section">
-            <div></div>
-        </div>
-    </div>
 
-
+    </main>
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
             <ul class="left">
@@ -122,7 +135,9 @@
     <template id="template-event">
         <div>
             <p></p>
-            <h6 style="display: inline;padding-right: 20px">Title</h6>
+            <a href="" style="text-decoration: none; color: inherit;">
+                <h6 style="display: inline;padding-right: 20px">Title</h6>
+            </a>
             <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
             <p></p>
             <div>
@@ -144,6 +159,7 @@
     </template>
     <script>
         let type = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
+        document.getElementById( "type" ).innerHTML = type;
         let xhr = new XMLHttpRequest();
         xhr.open( "GET", "/v2/events/bytype/" + type );
         xhr.onload = function () {
@@ -157,6 +173,7 @@
                     let event = temp.content.cloneNode( true );
                     event = event.firstElementChild;
                     event.setAttribute( "id", events_array[i].Title );
+                    event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
                     event.querySelector( "h6" ).innerHTML = events_array[i].Title;
                     event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
                     let eElement = document.getElementsByClassName( "section" )[0];

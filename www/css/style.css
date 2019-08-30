@@ -59,3 +59,17 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+.coral-text {
+    color: #ff7F50 !important;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
