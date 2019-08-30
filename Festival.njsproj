@@ -80,6 +80,7 @@
     <Content Include="www\statics\icons\mstile-150x150.png" />
     <Content Include="www\statics\icons\safari-pinned-tab.svg" />
     <Content Include="www\statics\icons\site.webmanifest" />
+    <Content Include="www\statics\index_background.jpg" />
     <Content Include="www\types.html">
       <SubType>Code</SubType>
     </Content>
