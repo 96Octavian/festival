@@ -158,6 +158,31 @@
     </template>
     <script>
 
+        let picker = function () {
+            let xhr = new XMLHttpRequest();
+            xhr.open( "GET", "/v2/events/gallery/" + EventID );
+            xhr.onload = function () {
+                if ( this.responseText == 0 ) {
+                    console.log( "Server DB empy response" );
+                }
+                else {
+                    let pics_array = JSON.parse( this.responseText );
+                    for ( let i = 0; i < pics_array.length; i++ ) {
+                        let temp = document.getElementById( "template-pic" );
+                        let pic = temp.content.cloneNode( true );
+                        pic = pic.firstElementChild;
+                        pic.setAttribute( "class", "mySlides fade" );
+                        pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/" + pics_array[i].Filename );
+                        if ( pics_array[i].Filename.includes( "cover" ) ) {
+                            pic.style.display = "block";
+                        }
+                        document.getElementById( "slideshow" ).appendChild( pic );
+                    }
+                }
+            }
+            xhr.send();
+        }
+
         let EventToArtist = function ( EventID ) {
             let id = new XMLHttpRequest();
             id.open( "GET", "/v2/performers/byevent/" + EventID );
@@ -209,20 +234,20 @@
 
 
 
+                picker();
+                //let temp = document.getElementById( "template-pic" );
+                //let pic = temp.content.cloneNode( true );
+                //pic = pic.firstElementChild;
+                //pic.setAttribute( "class", "mySlides fade" );
+                //pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/cover.png" );
+                //document.getElementById( "slideshow" ).appendChild( pic );
 
-                let temp = document.getElementById( "template-pic" );
-                let pic = temp.content.cloneNode( true );
-                pic = pic.firstElementChild;
-                pic.setAttribute( "class", "mySlides fade" );
-                pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/cover.png" );
-                document.getElementById( "slideshow" ).appendChild( pic );
-
-                temp = document.getElementById( "template-pic" );
-                pic = temp.content.cloneNode( true );
-                pic = pic.firstElementChild;
-                pic.setAttribute( "class", "mySlides fade" );
-                pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/1.png" );
-                document.getElementById( "slideshow" ).appendChild( pic );
+                //temp = document.getElementById( "template-pic" );
+                //pic = temp.content.cloneNode( true );
+                //pic = pic.firstElementChild;
+                //pic.setAttribute( "class", "mySlides fade" );
+                //pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/1.png" );
+                //document.getElementById( "slideshow" ).appendChild( pic );
             }
         }
         event.send();

@@ -60,6 +60,17 @@ module.exports.getSeminarById = function getSeminarById( req, res, next ) {
 		} );
 };
 
+module.exports.getGalleryById = function getGalleryById( req, res, next ) {
+	var eventID = req.swagger.params['eventID'].value;
+	Event.getGalleryById( eventID )
+		.then( function ( response ) {
+			utils.writeJson( res, response );
+		} )
+		.catch( function ( response ) {
+			utils.writeJson( res, response );
+		} );
+};
+
 module.exports.getEventByPerformer = function getEventByPerformer( req, res, next ) {
 	var performerID = req.swagger.params['performerID'].value;
 	Event.getEventByPerformer( performerID )

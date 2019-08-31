@@ -190,6 +190,33 @@ exports.getSeminarById = function ( seminarID ) {
 }
 
 /**
+ * Find Gallery by ID
+ * Returns a gallery
+ *
+ * seminarID Long ID of gallery to return
+ * returns Gallery
+ **/
+exports.getGalleryById = function ( eventID ) {
+	return sqlDb( "Gallery" )
+		.where( 'EventID', eventID );
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = {
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	};
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
+}
+
+/**
  * Find events by performer
  * Returns a list of events
  *
