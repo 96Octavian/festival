@@ -160,7 +160,7 @@
                         event.setAttribute( "id", events_array[i].Title );
                         event.querySelector( "h6" ).innerHTML = events_array[i].Title;
                         event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
-                        event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
+                        event.querySelector( "#plot" ).innerHTML = events_array[i].Abstract;
                         document.getElementById( date ).querySelector( "#event" ).appendChild( event );
                     }
                 }

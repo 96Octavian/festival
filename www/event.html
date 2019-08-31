@@ -80,13 +80,16 @@
 
                     <div style="float: left; padding-top: 2em">
                         <!--     Cover Section     -->
-                        <div class="col s6 m4">
-                            <p>Qui ci va la galleria di foto</p>
+                        <div id="slideshow" class="col s6 m4 slideshow-container">
+                            <!-- Next and previous buttons -->
+                            <!--<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>-->
                         </div>
 
                         <!--     Summary Section     -->
                         <div class="col s12 m8">
-                            <p id="plot">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+                            <p id="abstract">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+                            <p id="facts">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
                             <button id="buy" class="btn waves-effect waves-light">
                                 Buy
                                 <i class="material-icons right">add_shopping_cart</i>
@@ -148,7 +151,11 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
-
+    <template id="template-pic">
+        <div class="fade" style="display:none;">
+            <img src="img1.jpg" style="width:100%;max-height:100%;max-width:100%">
+        </div>
+    </template>
     <script>
 
         let EventToArtist = function ( EventID ) {
@@ -195,12 +202,45 @@
                 let event = JSON.parse( this.responseText )[0];
                 EventToArtist( EventID );
                 document.getElementById( "title" ).innerHTML = event.Title;
-                document.getElementById( "plot" ).innerHTML = event.Abstract;
+                document.getElementById( "abstract" ).innerHTML = event.Abstract;
+                document.getElementById( "facts" ).innerHTML = event.Facts;
                 document.getElementById( "sameday" ).setAttribute( "href", "/events/bydate/" + event.Date );
                 document.getElementById( "seminar" ).setAttribute( "href", "/events/seminarbyevent/" + EventID );
+
+
+
+
+                let temp = document.getElementById( "template-pic" );
+                let pic = temp.content.cloneNode( true );
+                pic = pic.firstElementChild;
+                pic.setAttribute( "class", "mySlides fade" );
+                pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/cover.png" );
+                document.getElementById( "slideshow" ).appendChild( pic );
+
+                temp = document.getElementById( "template-pic" );
+                pic = temp.content.cloneNode( true );
+                pic = pic.firstElementChild;
+                pic.setAttribute( "class", "mySlides fade" );
+                pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/1.png" );
+                document.getElementById( "slideshow" ).appendChild( pic );
             }
         }
         event.send();
+    </script>
+    <script>
+        var slideIndex = 0;
+        //showSlides();
+        setTimeout( showSlides, 5000 );
+
+        function showSlides() {
+            var slides = document.getElementsByClassName( "mySlides" );
+            slides[slideIndex].style.display = "none";
+            slideIndex++;
+            if ( slideIndex >= slides.length ) { slideIndex = 0 }
+            slides[slideIndex].style.display = "block";
+
+            setTimeout( showSlides, 5000 ); // Change image every 2 seconds
+        }
     </script>
 
 

@@ -74,7 +74,6 @@
 
                     <h5 id="performer" class="left col s12 m12">Name</h5>
                     <h8 id="affiliation" class="left col s12 m12"><a style="text-decoration: none; color: inherit;" href="#">Affiliation</a></h8>
-
                     <div style="float: left; padding-top: 2em">
                         <!--     Cover Section     -->
                         <div class="col s6 m4">
@@ -138,7 +137,23 @@
     <script src="js/init.js"></script>
 
     <script>
-
+        let check = function () {
+            let affiliation = new XMLHttpRequest();
+            affiliation.open( "GET", "/v2/performers/byartist/" + ArtistID );
+            affiliation.onload = function () {
+                if ( this.responseText == 0 ) {
+                    console.log( "Server DB empy response" );
+                }
+                else {
+                    let id = JSON.parse( this.responseText )
+                    if ( id.length == 0 ) {
+                        let element = document.getElementById( "affiliation" );
+                        element.parentNode.removeChild( element );
+                    }
+                }
+            }
+            affiliation.send();
+        }
         let ArtistToCompany = function ( PerformerID ) {
             let id = new XMLHttpRequest();
             id.open( "GET", "/v2/performers/" + PerformerID );
@@ -172,6 +187,7 @@
                 //ArtistToCompany( ArtistID );
                 document.getElementById( "affiliation" ).querySelector( "a" ).setAttribute( "href", "/affiliation/" + ArtistID );
                 document.getElementsByTagName( "button" )[0].setAttribute( "onclick", "location.href='/events/byperformer/" + ArtistID + "'" );
+                check();
             }
         }
         artist.send();

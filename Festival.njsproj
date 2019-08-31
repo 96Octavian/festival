@@ -85,6 +85,18 @@
     <Content Include="www\seminar.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="www\statics\events\11\1.png" />
+    <Content Include="www\statics\events\11\2.png" />
+    <Content Include="www\statics\events\11\3.png" />
+    <Content Include="www\statics\events\11\cover.png" />
+    <Content Include="www\statics\events\12\1.png" />
+    <Content Include="www\statics\events\12\2.png" />
+    <Content Include="www\statics\events\12\3.png" />
+    <Content Include="www\statics\events\12\cover.png" />
+    <Content Include="www\statics\events\13\1.png" />
+    <Content Include="www\statics\events\13\2.png" />
+    <Content Include="www\statics\events\13\3.png" />
+    <Content Include="www\statics\events\13\cover.png" />
     <Content Include="www\statics\icons\android-chrome-192x192.png" />
     <Content Include="www\statics\icons\android-chrome-512x512.png" />
     <Content Include="www\statics\icons\apple-touch-icon.png" />
@@ -109,6 +121,10 @@
     <Folder Include="www\css\" />
     <Folder Include="www\js\" />
     <Folder Include="www\statics\" />
+    <Folder Include="www\statics\events\" />
+    <Folder Include="www\statics\events\11\" />
+    <Folder Include="www\statics\events\12\" />
+    <Folder Include="www\statics\events\13\" />
     <Folder Include="www\statics\icons\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
