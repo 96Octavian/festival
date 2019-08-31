@@ -43,37 +43,23 @@
         <li><a href="/events/bytype/Seminar">Seminar</a></li>
     </ul>
 
-    <!-- Performers -->
-    <!-- Desktop -->
-    <ul id="performer-dropdown" class="dropdown-content">
-        <li><a href="/allperformers.html">All</a></li>
-    </ul>
-    <!-- Mobile -->
-    <ul id="mobile-performer-dropdown" class="dropdown-content">
-        <li><a href="/allperformers.html">All</a></li>
-    </ul>
-
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">
                 <a id="logo-container" href="/index.html" class="brand-logo right">Home</a>
                 <ul class="left hide-on-med-and-down">
                     <li><a id="login-desktop" href="/login.html">Login/Register</a></li>
-                    <li><a href="#">Navbar Link</a></li>
-                    <li><a href="#">Navbar Link</a></li>
                     <!-- Dropdown Trigger -->
                     <!-- // TODO: data-target indica quale id sarà mostrato, in init.js defininiamo la funzione ch lo attiva -->
                     <li><a class="event-dropdown-trigger" href="#" data-target="event-dropdown">Events</a></li>
-                    <li><a class="event-dropdown-trigger" href="#" data-target="performer-dropdown">Artists</a></li>
+                    <li><a href="/allperformers.html">Artists</a></li>
                 </ul>
 
                 <ul id="nav-mobile" class="sidenav">
                     <li><a id="login-mobile" href="/login.html">Login/Register</a></li>
-                    <li><a href="#">Navbar Link</a></li>
-                    <li><a href="#">Navbar Link</a></li>
                     <!-- Dropdown Trigger -->
                     <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-event-dropdown">Events</a></li>
-                    <li><a class="mobile-event-dropdown-trigger" href="#" data-target="mobile-performer-dropdown">Artists</a></li>
+                    <li><a href="/allperformers.html">Artists</a></li>
                 </ul>
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
@@ -147,8 +133,8 @@
         let type = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
         document.getElementById( "type" ).innerHTML = type;
         if ( type == "Seminar" ) {
-        let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/seminaries/");
+            let xhr = new XMLHttpRequest();
+            xhr.open( "GET", "/v2/events/seminaries/" );
             xhr.onload = function () {
                 if ( this.responseText == 0 ) {
                     console.log( "Server DB empy response" );
