@@ -84,7 +84,7 @@
     <main>
         <div class="container">
             <div class="row">
-                <h3 id="type" class="left col s12 m12">Calendar</h3>
+                <h3 class="left col s12 m12">Calendar</h3>
             </div>
             <div class="section">
                 <div></div>
@@ -135,44 +135,33 @@
     <template id="template-event">
         <div>
             <p></p>
-            <a href="" style="text-decoration: none; color: inherit;">
-                <h6 style="display: inline;padding-right: 20px">Title</h6>
-            </a>
+            <a href="" style="text-decoration: none; color: inherit;"><h6 style="display: inline;padding-right: 20px">Title</h6></a>
             <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
             <p></p>
             <div class="divider"></div>
         </div>
     </template>
+    <template id="template-row">
+        <div>
+            <div class="row">
+                <div>
+                    <!--     Date Section     -->
+                    <h5 class="left col s12 m4">Date</h5>
+
+                    <!--     Events Section     -->
+                    <div id="event" class="col s12 m8">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="divider"></div>
+        </div>
+    </template>
     <script>
-        let type = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
-        document.getElementById( "type" ).innerHTML = type;
-        if ( type == "Seminar" ) {
-        let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/seminaries/");
-            xhr.onload = function () {
-                if ( this.responseText == 0 ) {
-                    console.log( "Server DB empy response" );
-                }
-                else {
-                    let seminaries_array = JSON.parse( this.responseText );
-                    for ( let i = 0; i < seminaries_array.length; i++ ) {
-                        let temp = document.getElementById( "template-event" );
-                        let seminar = temp.content.cloneNode( true );
-                        seminar = seminar.firstElementChild;
-                        seminar.setAttribute( "id", seminaries_array[i].Title );
-                        seminar.querySelector( "a" ).setAttribute( "href", "/events/seminaries/" + seminaries_array[i].SeminarID );
-                        seminar.querySelector( "h6" ).innerHTML = seminaries_array[i].Title;
-                        seminar.querySelector( "#plot" ).innerHTML = seminaries_array[i].Description;
-                        let eElement = document.getElementsByClassName( "section" )[0];
-                        eElement.insertBefore( seminar, eElement.firstChild );
-                    }
-                }
-            }
-            xhr.send();
-        }
-        else {
+        let eventer = function ( date ) {
             let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/bytype/" + type );
+            xhr.open( "GET", "/v2/events/bydate/" + date );
             xhr.onload = function () {
                 if ( this.responseText == 0 ) {
                     console.log( "Server DB empy response" );
@@ -184,16 +173,32 @@
                         let event = temp.content.cloneNode( true );
                         event = event.firstElementChild;
                         event.setAttribute( "id", events_array[i].Title );
-                        event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
                         event.querySelector( "h6" ).innerHTML = events_array[i].Title;
+                        event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
                         event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
-                        let eElement = document.getElementsByClassName( "section" )[0];
-                        eElement.insertBefore( event, eElement.firstChild );
+                        document.getElementsByClassName("section")[0].appendChild( event );
                     }
                 }
             }
             xhr.send();
         }
+        // TODO: prendi l'evento con l'ID, poi prendi by date
+        let Date = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
+        document.getElementsByTagName( "h3" )[0].innerHTML = Date;
+        eventer( Date );
+        //let event = new XMLHttpRequest();
+        //event.open( "GET", "/v2/events/" + EventID );
+        //event.onload = function () {
+        //    if ( this.responseText == 0 ) {
+        //        console.log( "Server DB empy response" );
+        //    }fffsdfss
+        //    else {
+        //        let event = JSON.parse( this.responseText )[0];
+        //        document.getElementsByTagName( "h3" )[0].innerHTML = event.Date;
+        //        eventer( event.Date );
+        //    }
+        //}
+        //event.send();
     </script>
 
 </body>

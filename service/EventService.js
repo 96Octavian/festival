@@ -55,6 +55,40 @@ exports.getCalendar = function ( offset, limit ) {
 	//} );
 }
 
+/**
+ * Get available seminaries
+ * Get a list of all the seminaries in the calendar
+ *
+ * offset Integer Pagination offset. Default is 0. (optional)
+ * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
+ * returns List
+ **/
+exports.getSeminaries = function ( offset, limit ) {
+	return sqlDb( "Seminaries" )
+		.limit( limit )
+		.offset( offset )
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = [{
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}, {
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}];
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
+}
 
 /**
  * Find events by date
@@ -128,6 +162,32 @@ exports.getEventById = function ( eventID ) {
 	//} );
 }
 
+/**
+ * Find seminar by ID
+ * Returns a seminar
+ *
+ * seminarID Long ID of seminar to return
+ * returns Seminar
+ **/
+exports.getSeminarById = function ( seminarID ) {
+	return sqlDb( "Seminaries" )
+		.where( 'SeminarID', seminarID );
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = {
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	};
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
+}
 
 /**
  * Find events by performer
@@ -182,27 +242,40 @@ exports.getEventByPerformer = function ( performerID ) {
  * returns List
  **/
 exports.getEventBySeminar = function ( seminarID ) {
-	return new Promise( function ( resolve, reject ) {
-		var examples = {};
-		examples['application/json'] = [{
-			"fact": "fact",
-			"id": 0,
-			"abstract": "abstract",
-			"type": {},
-			"gallery": "gallery"
-		}, {
-			"fact": "fact",
-			"id": 0,
-			"abstract": "abstract",
-			"type": {},
-			"gallery": "gallery"
-		}];
-		if ( Object.keys( examples ).length > 0 ) {
-			resolve( examples[Object.keys( examples )[0]] );
-		} else {
-			resolve();
-		}
-	} );
+	return sqlDb( "EventToSeminar" )
+		.select( 'EventID' )
+		.where( 'SeminarID', seminarID )
+		.then( rows => {
+			let ids = []
+			let lista = JSON.stringify( rows, null, 2 );
+			lista = ( JSON.parse( lista ) );
+			for ( let i = 0; i < lista.length; i++ ) {
+				ids.push( lista[i].EventID );
+			}
+			return sqlDb( "Events" )
+				.whereIn( 'EventID', ids );
+		} )
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = [{
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}, {
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}];
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
 }
 
 
@@ -266,19 +339,32 @@ exports.getEventType = function () {
  * returns Seminar
  **/
 exports.getSeminarByEvent = function ( eventID ) {
-	return new Promise( function ( resolve, reject ) {
-		var examples = {};
-		examples['application/json'] = {
-			"date": "date",
-			"id": 0,
-			"place": "place",
-			"title": "title"
-		};
-		if ( Object.keys( examples ).length > 0 ) {
-			resolve( examples[Object.keys( examples )[0]] );
-		} else {
-			resolve();
-		}
-	} );
+	return sqlDb( "EventToSeminar" )
+		.select( 'SeminarID' )
+		.where( 'EventID', eventID )
+		.then( rows => {
+			let ids = []
+			let lista = JSON.stringify( rows, null, 2 );
+			lista = ( JSON.parse( lista ) );
+			for ( let i = 0; i < lista.length; i++ ) {
+				ids.push( lista[i].SeminarID );
+			}
+			return sqlDb( "Seminaries" )
+				.whereIn( 'SeminarID', ids );
+		} )
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = {
+	//		"date": "date",
+	//		"id": 0,
+	//		"place": "place",
+	//		"title": "title"
+	//	};
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
 }
 

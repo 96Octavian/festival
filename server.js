@@ -65,6 +65,18 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 		if ( req.url.includes( "byperformer/" ) ) {
 			req.url = "byperformer.html";
 		}
+		if ( req.url.includes( "bydate/" ) ) {
+			req.url = "sameday.html";
+		}
+		if ( req.url.includes( "seminarbyevent/" ) ) {
+			req.url = "seminar.html";
+		}
+		if ( req.url.includes( "byseminar/" ) ) {
+			req.url = "byseminar.html";
+		}
+		if ( req.url.match( /^\/events\/seminaries\/([0-9]+)$/ ) ) {
+			req.url = "seminar.html";
+		}
 
 		serving( req, res, next );
 		//console.log( "Modified URL: " + req.url );

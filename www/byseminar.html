@@ -84,7 +84,7 @@
     <main>
         <div class="container">
             <div class="row">
-                <h3 id="type" class="left col s12 m12">Calendar</h3>
+                <h3 id="type" class="left col s12 m12">Related events</h3>
             </div>
             <div class="section">
                 <div></div>
@@ -144,56 +144,29 @@
         </div>
     </template>
     <script>
-        let type = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
-        document.getElementById( "type" ).innerHTML = type;
-        if ( type == "Seminar" ) {
+        let SeminarID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
         let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/seminaries/");
-            xhr.onload = function () {
-                if ( this.responseText == 0 ) {
-                    console.log( "Server DB empy response" );
-                }
-                else {
-                    let seminaries_array = JSON.parse( this.responseText );
-                    for ( let i = 0; i < seminaries_array.length; i++ ) {
-                        let temp = document.getElementById( "template-event" );
-                        let seminar = temp.content.cloneNode( true );
-                        seminar = seminar.firstElementChild;
-                        seminar.setAttribute( "id", seminaries_array[i].Title );
-                        seminar.querySelector( "a" ).setAttribute( "href", "/events/seminaries/" + seminaries_array[i].SeminarID );
-                        seminar.querySelector( "h6" ).innerHTML = seminaries_array[i].Title;
-                        seminar.querySelector( "#plot" ).innerHTML = seminaries_array[i].Description;
-                        let eElement = document.getElementsByClassName( "section" )[0];
-                        eElement.insertBefore( seminar, eElement.firstChild );
-                    }
+        xhr.open( "GET", "/v2/events/byseminar/" + SeminarID );
+        xhr.onload = function () {
+            if ( this.responseText == 0 ) {
+                console.log( "Server DB empy response" );
+            }
+            else {
+                let events_array = JSON.parse( this.responseText );
+                for ( let i = 0; i < events_array.length; i++ ) {
+                    let temp = document.getElementById( "template-event" );
+                    let event = temp.content.cloneNode( true );
+                    event = event.firstElementChild;
+                    event.setAttribute( "id", events_array[i].Title );
+                    event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
+                    event.querySelector( "h6" ).innerHTML = events_array[i].Title;
+                    event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
+                    let eElement = document.getElementsByClassName( "section" )[0];
+                    eElement.insertBefore( event, eElement.firstChild );
                 }
             }
-            xhr.send();
         }
-        else {
-            let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/bytype/" + type );
-            xhr.onload = function () {
-                if ( this.responseText == 0 ) {
-                    console.log( "Server DB empy response" );
-                }
-                else {
-                    let events_array = JSON.parse( this.responseText );
-                    for ( let i = 0; i < events_array.length; i++ ) {
-                        let temp = document.getElementById( "template-event" );
-                        let event = temp.content.cloneNode( true );
-                        event = event.firstElementChild;
-                        event.setAttribute( "id", events_array[i].Title );
-                        event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
-                        event.querySelector( "h6" ).innerHTML = events_array[i].Title;
-                        event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
-                        let eElement = document.getElementsByClassName( "section" )[0];
-                        eElement.insertBefore( event, eElement.firstChild );
-                    }
-                }
-            }
-            xhr.send();
-        }
+        xhr.send();
     </script>
 
 </body>

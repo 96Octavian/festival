@@ -58,6 +58,9 @@
     <Content Include="www\byperformer.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="www\byseminar.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="www\css\materialize.css" />
     <Content Include="www\css\materialize.min.css" />
     <Content Include="www\css\style.css" />
@@ -74,6 +77,12 @@
     <Content Include="www\js\materialize.js" />
     <Content Include="www\js\materialize.min.js" />
     <Content Include="www\performers.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="www\sameday.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="www\seminar.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="www\statics\icons\android-chrome-192x192.png" />

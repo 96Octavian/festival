@@ -15,6 +15,18 @@ module.exports.getCalendar = function getCalendar( req, res, next ) {
 		} );
 };
 
+module.exports.getSeminaries = function getSeminaries( req, res, next ) {
+	var offset = req.swagger.params['offset'].value || 0;
+	var limit = req.swagger.params['limit'].value || 20 < 500 ? req.swagger.params['limit'].value : 500;
+	Event.getSeminaries( offset, limit )
+		.then( function ( response ) {
+			utils.writeJson( res, response );
+		} )
+		.catch( function ( response ) {
+			utils.writeJson( res, response );
+		} );
+};
+
 module.exports.getEventByDate = function getEventByDate( req, res, next ) {
 	var date = req.swagger.params['date'].value;
 	Event.getEventByDate( date )
@@ -29,6 +41,17 @@ module.exports.getEventByDate = function getEventByDate( req, res, next ) {
 module.exports.getEventById = function getEventById( req, res, next ) {
 	var eventID = req.swagger.params['eventID'].value;
 	Event.getEventById( eventID )
+		.then( function ( response ) {
+			utils.writeJson( res, response );
+		} )
+		.catch( function ( response ) {
+			utils.writeJson( res, response );
+		} );
+};
+
+module.exports.getSeminarById = function getSeminarById( req, res, next ) {
+	var seminarID = req.swagger.params['seminarID'].value;
+	Event.getSeminarById( seminarID )
 		.then( function ( response ) {
 			utils.writeJson( res, response );
 		} )

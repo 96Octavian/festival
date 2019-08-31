@@ -87,11 +87,20 @@
                 <div class="row">
 
                     <h5 id="title" class="left col s12 m12">Titolo</h5>
-                    <h8 id="author" class="left col s12 m12"><a style="text-decoration: none; color: inherit;" href="#">Performer</a></h8>
+                    <h6 id="author" class="left col s12 m12"><a style="text-decoration: none; color: inherit;" href="#">Performer</a></h6>
+                    <a id ="sameday" style="text-decoration: none; color: inherit;" href="#">
+                        <h9 id="author" class="left col s12 m12">Nello stesso giorno</h9>
+                    </a>
 
                     <div style="float: left; padding-top: 2em">
                         <!--     Cover Section     -->
                         <div class="col s6 m4">
+                            <p>Qui ci va la galleria di foto</p>
+                        </div>
+
+                        <!--     Summary Section     -->
+                        <div class="col s12 m8">
+                            <p id="plot">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
                             <button id="buy" class="btn waves-effect waves-light">
                                 Buy
                                 <i class="material-icons right">add_shopping_cart</i>
@@ -102,12 +111,8 @@
                             <button id="unauthorized" style="display:none" class="btn disabled">
                                 <i class="material-icons teal-text right">cancel</i>
                             </button>
-                            <h8 id="availability" class="teal-text">BOH</h8>
-                        </div>
-
-                        <!--     Summary Section     -->
-                        <div class="col s12 m8">
-                            <p id="plot">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+                            or
+                            <a id="seminar">Join the discussion: seminar</a>
                         </div>
 
                     </div>
@@ -202,9 +207,11 @@
             }
             else {
                 let event = JSON.parse( this.responseText )[0];
-                let ArtistID = EventToArtist( EventID );
+                EventToArtist( EventID );
                 document.getElementById( "title" ).innerHTML = event.Title;
                 document.getElementById( "plot" ).innerHTML = event.Abstract;
+                document.getElementById( "sameday" ).setAttribute( "href", "/events/bydate/" + event.Date );
+                document.getElementById( "seminar" ).setAttribute( "href", "/events/seminarbyevent/" + EventID );
             }
         }
         event.send();
