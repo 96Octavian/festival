@@ -33,11 +33,33 @@ module.exports.userLoginPOST = function userLoginPOST( req, res, next ) {
 	} )
 };
 
+module.exports.reserveByEventID = function reserveByEventID( req, res, next ) {
+	var eventID = req.swagger.params["eventID"].value;
+	if ( typeof req.session.logged_id === 'undefined' ) {
+		req.session = null;
+		utils.writeJson( res, "", 401 );
+		return;
+	}
+	var userID = req.session.logged_id;
+	console.log( "User " + userID + " is trying to book an event" );
+	User.reserveByEventID( userID, eventID ).then( ids => {
+		console.log( ids );
+		if ( ids.length > 0 ) {
+			console.log( "Event " + eventID + " reserved" );
+			utils.writeJson( res, "", 200 );
+		} else {
+			utils.writeJson( res, "", 401 );
+		}
+	} )
+};
+
 module.exports.userRegisterPOST = function userRegisterPOST( req, res, next ) {
 	var username = req.swagger.params["username"].value;
 	var password = req.swagger.params['password'].value;
 	console.log( "User " + username + " is trying to register" );
 	User.userRegisterPOST( username, password ).then( response => {
+		console.log( response );
+		console.log( "Response: " + response );
 		if ( response.length == 1 ) {
 			console.log( "User " + username + " authenticated" );
 			console.log( "Referer: " + req.headers.referer );

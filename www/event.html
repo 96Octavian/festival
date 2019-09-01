@@ -90,14 +90,15 @@
                         <div class="col s12 m8">
                             <p id="abstract">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
                             <p id="facts">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
-                            <button id="buy" class="btn waves-effect waves-light">
-                                Buy
-                                <i class="material-icons right">add_shopping_cart</i>
+                            <button id="reserve" class="btn waves-effect waves-light" onclick="reserve()">
+                                Reserve
+                                <i class="material-icons right">event_available</i>
                             </button>
                             <button id="done" style="display:none" class="btn disabled">
                                 <i class="material-icons teal-text right">done</i>
                             </button>
                             <button id="unauthorized" style="display:none" class="btn disabled">
+                                Logged out
                                 <i class="material-icons teal-text right">cancel</i>
                             </button>
                             or
@@ -218,7 +219,7 @@
             performer.send();
         }
 
-        let EventID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
+        var EventID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
         let event = new XMLHttpRequest();
         event.open( "GET", "/v2/events/" + EventID );
         event.onload = function () {
@@ -270,6 +271,31 @@
         }
     </script>
 
+    <script>
+        var reserve = function () {
+            console.log( "Function" );
+            let user = new XMLHttpRequest();
+
+            user.open( "GET", "/v2/user/reserve/" + EventID );
+            user.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+            user.onreadystatechange = function () {
+                if ( this.readyState === XMLHttpRequest.DONE ) {
+                    if ( this.status == 401 ) {
+                        document.getElementById( "unauthorized" ).style.display = "inline";
+                        setTimeout( () => {
+                            document.getElementById( "unauthorized" ).style.display = "none";
+                        }, 3000 );
+                    } else if ( this.status == 200 ) {
+                        document.getElementById( "done" ).style.display = "inline";
+                        setTimeout( () => {
+                            document.getElementById( "done" ).style.display = "none";
+                        }, 3000 );
+                    }
+                }
+            }
+            user.send();
+        }
+    </script>
 
 </body>
 </html>

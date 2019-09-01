@@ -58,6 +58,30 @@ exports.userLoginPOST = function ( username, password ) {
 }
 
 /**
+ * Reserve
+ * Reserve an event
+ *
+ * username String 
+ * eventID Integer 
+ * no response value expected for this operation
+ **/
+exports.reserveByEventID = function ( username, eventID ) {
+	console.log( "Params: " + username + ", " + eventID );
+	return sqlDb( "UserToEvent" ).where( 'EventID', eventID ).andWhere( 'UserID', username ).then( ( rows ) => {
+		if ( rows.length > 0 ) {
+			return sqlDb( "UserToEvent" ).where( 'EventID', eventID ).andWhere( 'UserID', username );
+		}
+		else {
+			return sqlDb( "UserToEvent" ).insert( { UserID: username, EventID: eventID } )
+				.then( () => {
+					return sqlDb( "UserToEvent" ).where( 'EventID', eventID ).andWhere( 'UserID', username );
+				} )
+		}
+	} )
+
+}
+
+/**
  * Register
  * Register into the store
  *
@@ -65,11 +89,11 @@ exports.userLoginPOST = function ( username, password ) {
  * no response value expected for this operation
  **/
 exports.userRegisterPOST = function ( username, password ) {
-	return checkIfUserExists( username )
+	return sqlDb( "Users" ).where( 'Name', username )
 		.then( function ( rows ) {
 			if ( Object.keys( rows ).length == 0 ) {
 
-				sqlDb( "Users" ).select( "UserID" )
+				return sqlDb( "Users" ).select( "UserID" )
 					.then( ids => {
 						console.log( ids );
 						let lista = []
@@ -84,12 +108,12 @@ exports.userRegisterPOST = function ( username, password ) {
 						return sqlDb( "Users" ).insert( { UserID: ID, Name: username, Password: password } )
 							.then( () => {
 								return sqlDb( "Users" ).where( 'Name', username );
-							})
+							} )
 					} )
 			}
 			else {
 				return sqlDb( "Users" ).where( 'Name', username );
-				}
+			}
 		} )
 }
 

@@ -8,10 +8,10 @@ checkUserAuth.onreadystatechange = function () {
 	if ( this.readyState === XMLHttpRequest.DONE && !this.responseURL.includes( "login" ) ) {
 
 		document.getElementById( "login-desktop" ).innerHTML = "Cart";
-		document.getElementById( "login-desktop" ).setAttribute( 'href', 'cart.html' );
+		document.getElementById( "login-desktop" ).setAttribute( 'href', '/cart.html' );
 
 		document.getElementById( "login-mobile" ).innerHTML = "Cart";
-		document.getElementById( "login-mobile" ).setAttribute( 'href', 'cart.html' );
+		document.getElementById( "login-mobile" ).setAttribute( 'href', '/cart.html' );
 
 	}
 }
