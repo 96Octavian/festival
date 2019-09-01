@@ -5,12 +5,15 @@
 
 var fs = require( 'fs' ),
 	path = require( 'path' ),
-	http = require( 'http' );
+	http = require( 'http' ),
+	util = require( 'util' );
 
 var app = require( 'connect' )();
 var morgan = require( 'morgan' );
 var swaggerTools = require( 'swagger-tools' );
 var jsyaml = require( 'js-yaml' );
+let cookieSession = require( "cookie-session" );
+let cookieParser = require( "cookie-parser" );
 var serverPort = process.env.PORT || 8080;
 let serveStatic = require( "serve-static" );
 
@@ -26,6 +29,10 @@ var options = {
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var spec = fs.readFileSync( path.join( __dirname, 'api/swagger.yaml' ), 'utf8' );
 var swaggerDoc = jsyaml.safeLoad( spec );
+
+// Add cookies to responses
+app.use( cookieParser() );
+app.use( cookieSession( { keys: ["secret"] } ) );
 
 var serving = serveStatic( __dirname + "/www" );
 
@@ -45,6 +52,28 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 
 	// Serve the Swagger documents and Swagger UI
 	app.use( middleware.swaggerUi() );
+
+	//// Redirect if logged in
+	//app.use( "/login.html", function ( req, res, next ) {
+	//	console.log( "Session " + util.inspect( req.session ) );
+	//	req.session.goBackTo = req.headers.referer;
+	//	if ( typeof ( req.session.logged_id ) !== 'undefined' ) {
+	//		res.writeHead( 307, { "Location": '/cart.html' } );
+	//		res.end();
+	//	} else {
+	//		next();
+	//	}
+	//} );
+	//app.use( "/cart.html", function ( req, res, next ) {
+	//	console.log( "Session " + util.inspect( req.session ) );
+	//	req.session.goBackTo = req.headers.referer;
+	//	if ( typeof ( req.session.logged_id ) !== 'undefined' ) {
+	//		res.writeHead( 307, { "Location": '/login.html' } );
+	//		res.end();
+	//	} else {
+	//		next();
+	//	}
+	//} );
 
 	// Modify the URL
 	app.use( function ( req, res, next ) {
@@ -77,9 +106,31 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 		if ( req.url.match( /^\/events\/seminaries\/([0-9]+)$/ ) ) {
 			req.url = "seminar.html";
 		}
+		if ( req.url.includes( "login.html" ) || req.url.includes( "cart.html" ) ) {
+			console.log( "Session " + util.inspect( req.session ) );
+			if ( req.url.includes( "login.html" ) ) {
+				req.session.goBackTo = req.headers.referer;
+				if ( typeof ( req.session.logged_id ) !== 'undefined' ) {
+					res.writeHead( 307, { "Location": 'cart.html' } );
+					res.end();
+					return;
+					//req.url = "cart.html";
+					//console.log( "Now: " + req.url );
+				}
+			}
+			else {
+				req.session.goBackTo = req.headers.referer;
+				if ( typeof ( req.session.logged_id ) === 'undefined' ) {
+					res.writeHead( 307, { "Location": 'login.html' } );
+					res.end();
+					return;
+					//req.url = "login.html";
+					//console.log( "Now: " + req.url );
+				}
+			}
+		}
 
 		serving( req, res, next );
-		//console.log( "Modified URL: " + req.url );
 	} );
 
 	// Start the server

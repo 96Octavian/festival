@@ -82,6 +82,18 @@ module.exports.getEventByPerformer = function getEventByPerformer( req, res, nex
 		} );
 };
 
+module.exports.getEventByUser = function getEventByUser( req, res, next ) {
+	var userID = req.session.logged_id;
+	console.log( "EventController: " + typeof ( userID ) );
+	Event.getEventByUser( userID )
+		.then( function ( response ) {
+			utils.writeJson( res, response );
+		} )
+		.catch( function ( response ) {
+			utils.writeJson( res, response );
+		} );
+};
+
 module.exports.getEventBySeminar = function getEventBySeminar( req, res, next ) {
 	var seminarID = req.swagger.params['seminarID'].value;
 	Event.getEventBySeminar( seminarID )

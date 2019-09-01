@@ -69,24 +69,11 @@
     <!-- #endregion  -->
     <main>
         <div class="container">
+            <div class="row">
+                <h3 id="type" class="left col s12 m12">Reservations</h3>
+            </div>
             <div class="section">
-                <div class="row">
-
-                    <h5 id="title" class="left col s12 m12">Titolo</h5>
-                    <h6 id="date" class="left col s12 m12"><a style="text-decoration: none; color: inherit;" href="#">Date</a></h6>
-                    <a id="sameday" style="text-decoration: none; color: inherit;" href="#">
-                    </a>
-
-                    <div style="float: left; padding-top: 2em">
-                        <!--     Summary Section     -->
-                        <div class="col s12 m8">
-                            <p id="description">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
-                            <a id="events">Events discussed here</a>
-                        </div>
-
-                    </div>
-
-                </div>
+                <div></div>
             </div>
         </div>
 
@@ -133,33 +120,41 @@
     <script src="js/init.js"></script>
     <script src="/statics/js/checkLogin.js"></script>
 
+    <template id="template-event">
+        <div>
+            <p></p>
+            <a href="" style="text-decoration: none; color: inherit;">
+                <h6 style="display: inline;padding-right: 20px">Title</h6>
+            </a>
+            <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+            <p></p>
+            <div class="divider"></div>
+        </div>
+    </template>
     <script>
-
-        let EventID = document.URL.substring( document.URL.lastIndexOf( '/' ) + 1 )
-        let seminar = new XMLHttpRequest();
-        if ( String( EventID ).charAt( 0 ) == '1' ) {
-            addr = "/v2/events/seminarbyevent/" + EventID;
-        }
-        else {
-            addr = "/v2/events/seminaries/" + EventID;
-        }
-        seminar.open( "GET", addr );
-        seminar.onload = function () {
+        let xhr = new XMLHttpRequest();
+        xhr.open( "GET", "/v2/event/byuser/" );
+        xhr.onload = function () {
             if ( this.responseText == 0 ) {
                 console.log( "Server DB empy response" );
             }
             else {
-                let sem = JSON.parse( this.responseText )[0];
-                //let ArtistID = EventToArtist( EventID );
-                document.getElementById( "title" ).innerHTML = sem.Title;
-                document.getElementById( "date" ).innerHTML = sem.Date;
-                document.getElementById( "description" ).innerHTML = sem.Description + "\nFind us at the " + sem.Place;
-                document.getElementById( "events" ).setAttribute( "href", "/events/byseminar/" + sem.SeminarID );
+                let events_array = JSON.parse( this.responseText );
+                for ( let i = 0; i < events_array.length; i++ ) {
+                    let temp = document.getElementById( "template-event" );
+                    let event = temp.content.cloneNode( true );
+                    event = event.firstElementChild;
+                    event.setAttribute( "id", events_array[i].Title );
+                    event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
+                    event.querySelector( "h6" ).innerHTML = events_array[i].Title;
+                    event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
+                    let eElement = document.getElementsByClassName( "section" )[0];
+                    eElement.insertBefore( event, eElement.firstChild );
+                }
             }
         }
-        seminar.send();
+        xhr.send();
     </script>
-
 
 </body>
 </html>

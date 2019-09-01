@@ -26,23 +26,22 @@ exports.usersDbSetup = function ( database ) {
  * username Long username of username to return
  * returns User
  **/
-exports.getUserByUsername = function(username) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "password" : "password",
-  "eventList" : [ 6, 6 ],
-  "id" : 0,
-  "username" : "username"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.getUserByUsername = function ( username ) {
+	return new Promise( function ( resolve, reject ) {
+		var examples = {};
+		examples['application/json'] = {
+			"password": "password",
+			"eventList": [6, 6],
+			"id": 0,
+			"username": "username"
+		};
+		if ( Object.keys( examples ).length > 0 ) {
+			resolve( examples[Object.keys( examples )[0]] );
+		} else {
+			resolve();
+		}
+	} );
 }
-
 
 /**
  * Login
@@ -52,12 +51,11 @@ exports.getUserByUsername = function(username) {
  * password String 
  * no response value expected for this operation
  **/
-exports.userLoginPOST = function(username,password) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
+exports.userLoginPOST = function ( username, password ) {
 
+	return sqlDb( "Users" ).where( 'Name', username ).andWhere( 'Password', password ).select( 'UserID' );
+
+}
 
 /**
  * Register
@@ -66,9 +64,35 @@ exports.userLoginPOST = function(username,password) {
  * body User 
  * no response value expected for this operation
  **/
-exports.userRegisterPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.userRegisterPOST = function ( username, password ) {
+	return checkIfUserExists( username )
+		.then( function ( rows ) {
+			if ( Object.keys( rows ).length == 0 ) {
+
+				sqlDb( "Users" ).select( "UserID" )
+					.then( ids => {
+						console.log( ids );
+						let lista = []
+						for ( let i = 0; i < ids.length; i++ ) {
+							lista.push( ids[i].UserID );
+						}
+						let ID = 9;
+						while ( lista.includes( ID ) ) {
+							ID++;
+						}
+						console.log( "ID = " + ID );
+						return sqlDb( "Users" ).insert( { UserID: ID, Name: username, Password: password } )
+							.then( () => {
+								return sqlDb( "Users" ).where( 'Name', username );
+							})
+					} )
+			}
+			else {
+				return sqlDb( "Users" ).where( 'Name', username );
+				}
+		} )
 }
 
+var checkIfUserExists = function ( username ) {
+	return sqlDb( "Users" ).where( 'Name', username );
+}

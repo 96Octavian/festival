@@ -119,6 +119,8 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
+    <script src="/statics/js/checkLogin.js"></script>
+
     <template id="template-row">
         <div>
             <div class="row">
@@ -155,7 +157,7 @@
                     artist.setAttribute( "id", artists_array[i].Name );
                     artist.querySelector( "a" ).setAttribute( "href", "/performers/" + artists_array[i].ArtistID );
                     artist.querySelector( "h5" ).innerHTML = artists_array[i].Name;
-                    artist.querySelector( "#description" ).querySelector("p").innerHTML = artists_array[i].Achievements;
+                    artist.querySelector( "#description" ).querySelector( "p" ).innerHTML = artists_array[i].Achievements;
                     let eElement = document.getElementsByClassName( "section" )[0];
                     eElement.insertBefore( artist, eElement.firstChild );
                 }

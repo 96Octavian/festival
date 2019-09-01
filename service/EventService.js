@@ -260,6 +260,50 @@ exports.getEventByPerformer = function ( performerID ) {
 	//} );
 }
 
+/**
+ * Find events by user
+ * Returns a list of events
+ *
+ * userID String performer of events to return
+ * returns List
+ **/
+exports.getEventByUser = function ( userID ) {
+	console.log( "EventService" );
+	return sqlDb( "UserToEvent" )
+		.select( 'EventID' )
+		.where( 'UserID', userID )
+		.then( rows => {
+			let ids = []
+			let lista = JSON.stringify( rows, null, 2 );
+			lista = ( JSON.parse( lista ) );
+			for ( let i = 0; i < lista.length; i++ ) {
+				ids.push( lista[i].EventID );
+			}
+			return sqlDb( "Events" )
+				.whereIn( 'EventID', ids );
+		} )
+	//return new Promise( function ( resolve, reject ) {
+	//	var examples = {};
+	//	examples['application/json'] = [{
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}, {
+	//		"fact": "fact",
+	//		"id": 0,
+	//		"abstract": "abstract",
+	//		"type": {},
+	//		"gallery": "gallery"
+	//	}];
+	//	if ( Object.keys( examples ).length > 0 ) {
+	//		resolve( examples[Object.keys( examples )[0]] );
+	//	} else {
+	//		resolve();
+	//	}
+	//} );
+}
 
 /**
  * Find events by seminar

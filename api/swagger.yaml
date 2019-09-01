@@ -132,7 +132,6 @@ paths:
         404:
           description: "Gallery not found"
       x-swagger-router-controller: "Event"
-
   /events/{eventID}:
     get:
       tags:
@@ -264,6 +263,24 @@ paths:
           description: "Invalid performer ID supplied"
         404:
           description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /event/byuser:
+    get:
+      tags:
+      - "event"
+      summary: "Find events by user"
+      description: "Returns a list of events"
+      operationId: "getEventByUser"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
       x-swagger-router-controller: "Event"
   /events/bytype:
     get:
@@ -503,18 +520,21 @@ paths:
       tags:
       - "user"
       summary: "Register"
-      description: "Register into the store"
+      description: "Register"
       operationId: "userRegisterPOST"
       consumes:
       - "application/x-www-form-urlencoded"
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
+      - name: "username"
+        in: "formData"
         required: true
-        schema:
-          $ref: "#/definitions/User"
+        type: "string"
+      - name: "password"
+        in: "formData"
+        required: true
+        type: "string"
       responses:
         200:
           description: "succesful registration"
