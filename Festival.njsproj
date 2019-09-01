@@ -39,6 +39,7 @@
     <Content Include="controllers\Performer.js" />
     <Content Include="controllers\User.js" />
     <Content Include="package-lock.json" />
+    <Content Include="Procfile" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
