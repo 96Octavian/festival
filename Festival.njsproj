@@ -74,6 +74,7 @@
     <Content Include="www\events.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="www\app.zip" />
     <Content Include="www\index.html">
       <SubType>Code</SubType>
     </Content>

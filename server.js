@@ -138,6 +138,9 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 			if ( req.url.includes( "spec.yaml" ) ) {
 				req.url = "swagger.yaml";
 			}
+			if ( req.url.includes( "app.zip" ) ) {
+				req.url = "app.zip";
+			}
 		}
 
 		serving( req, res, next );
