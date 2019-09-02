@@ -619,14 +619,14 @@ definitions:
         type: "string"
       Title:
         type: "string"
-	  Date:
+      Date:
         type: "string"
     example:
       SeminarID: 21
       Place: "Auditorium"
       Description: "We talk about lots of things, one more ethereal and ineffable than the other so that we can say we're smart but we're actually talking nonsense. If you condensed our speeches you'd be left with nothing more than 2 hours of your time wasted."
       Title: "A good explanation"
-	  Date: "2019-08-01"
+      Date: "2019-08-01"
   Event:
     type: "object"
     properties:
@@ -638,14 +638,14 @@ definitions:
         type: "string"
       Title:
         type: "string"
-	  Date:
+      Date:
         type: "string"
     example:
       EventID: 11
       Facts: "In his new iteration this year, the festival aims at providing any attendant with a resonant new experience. Exhibitions will see artists on stage interacting with the public, and the public itself becoming the lead star on stage."
       Abstract: "Discover new armonics and experience live, authentic music in our majestic scenery."
       Title: "Summer music festival"
-	  Date: "2019-08-01"
+      Date: "2019-08-01"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
