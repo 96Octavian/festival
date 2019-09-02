@@ -129,6 +129,16 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 				}
 			}
 		}
+		if ( req.url.includes( "backend" ) ) {
+			if ( req.url.includes( "swaggerui" ) ) {
+				res.writeHead( 307, { "Location": '/docs' } );
+				res.end();
+				return;
+			}
+			if ( req.url.includes( "spec.yaml" ) ) {
+				req.url = "swagger.yaml";
+			}
+		}
 
 		serving( req, res, next );
 	} );

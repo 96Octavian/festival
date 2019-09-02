@@ -1,0 +1,651 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple festival website created based on Swagger.  You can find out more about\
+    \     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,\
+    \ #swagger](http://swagger.io/irc/)."
+  version: "1.0.0"
+  title: "Swagger Festival"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "hyp-festival.herokuapp.com"
+basePath: "/v2"
+tags:
+- name: "event"
+  description: "Operations about events"
+- name: "performer"
+  description: "Operations about performers"
+- name: "user"
+  description: "Operations about users"
+schemes:
+- "http"
+paths:
+  /events:
+    get:
+      tags:
+      - "event"
+      summary: "Get available events"
+      description: "Get a list of all the events in the calendar"
+      operationId: "getCalendar"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+      x-swagger-router-controller: "Event"
+  /events/seminaries:
+    get:
+      tags:
+      - "event"
+      summary: "Get available seminaries"
+      description: "Get a list of all the seminaries in the calendar"
+      operationId: "getSeminaries"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Seminaries"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Seminar"
+      x-swagger-router-controller: "Event"
+  /events/seminaries/{seminarID}:
+    get:
+      tags:
+      - "event"
+      summary: "Find seminar by ID"
+      description: "Returns a seminar"
+      operationId: "getSeminarById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "seminarID"
+        in: "path"
+        description: "ID of seminar to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Seminar"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Seminar not found"
+      x-swagger-router-controller: "Event"
+  /events/gallery/{eventID}:
+    get:
+      tags:
+      - "event"
+      summary: "Find gallery by ID"
+      description: "Returns a gallery"
+      operationId: "getGalleryById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventID"
+        in: "path"
+        description: "ID of gallery to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Gallery not found"
+      x-swagger-router-controller: "Event"
+  /events/{eventID}:
+    get:
+      tags:
+      - "event"
+      summary: "Find event by ID"
+      description: "Returns an event"
+      operationId: "getEventById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventID"
+        in: "path"
+        description: "ID of event to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/bydate/{date}:
+    get:
+      tags:
+      - "event"
+      summary: "Find events by date"
+      description: "Returns a list of events"
+      operationId: "getEventByDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "date"
+        in: "path"
+        description: "date of events to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "Invalid date supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/byseminar/{seminarID}:
+    get:
+      tags:
+      - "event"
+      summary: "Find events by seminar"
+      description: "Returns a list of events"
+      operationId: "getEventBySeminar"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "seminarID"
+        in: "path"
+        description: "seminar of events to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "Invalid date supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/seminarbyevent/{eventID}:
+    get:
+      tags:
+      - "event"
+      summary: "Find seminar by event"
+      description: "Returns a seminar"
+      operationId: "getSeminarByEvent"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventID"
+        in: "path"
+        description: "event of seminar to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A seminar"
+          schema:
+            $ref: "#/definitions/Seminar"
+        400:
+          description: "Invalid date supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/byperformer/{performerID}:
+    get:
+      tags:
+      - "event"
+      summary: "Find events by performer"
+      description: "Returns a list of events"
+      operationId: "getEventByPerformer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "performerID"
+        in: "path"
+        description: "performer of events to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "Invalid performer ID supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/bytype:
+    get:
+      tags:
+      - "event"
+      summary: "Find events type"
+      description: "Returns a list of events type"
+      operationId: "getEventType"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Types"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Types"
+      x-swagger-router-controller: "Event"
+  /events/bytype/{type}:
+    get:
+      tags:
+      - "event"
+      summary: "Find events by type"
+      description: "Returns a list of events"
+      operationId: "getEventByType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "path"
+        description: "type of events to return"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        400:
+          description: "Invalid type supplied"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /performers:
+    get:
+      tags:
+      - "performer"
+      summary: "Get available performers"
+      description: "Get a list of all the performers of the festival"
+      operationId: "getPerformers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: "Pagination offset. Default is 0."
+        required: false
+        type: "integer"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of items per page. Default is 20 and cannot exceed\
+          \ 500."
+        required: false
+        type: "integer"
+      responses:
+        200:
+          description: "A collection of Performers"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Artist"
+      x-swagger-router-controller: "Performer"
+  /performers/{performerID}:
+    get:
+      tags:
+      - "performer"
+      summary: "Find a performer by ID"
+      description: "Returns a performer"
+      operationId: "getPerformerById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "performerID"
+        in: "path"
+        description: "ID of performer to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema: {}
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Performer not found"
+      x-swagger-router-controller: "Performer"
+  /performers/byevent/{eventID}:
+    get:
+      tags:
+      - "performer"
+      summary: "Find a performer by event"
+      description: "Returns a performer"
+      operationId: "getPerformerByEvent"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventID"
+        in: "path"
+        description: "ID of event to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items: {}
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Performer not found"
+      x-swagger-router-controller: "Performer"
+  /performers/bycompany/{companyID}:
+    get:
+      tags:
+      - "performer"
+      summary: "Find performers by Company"
+      description: "Returns performers"
+      operationId: "getPerformerByCompany"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "companyID"
+        in: "path"
+        description: "ID of company"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items: {}
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Performer not found"
+      x-swagger-router-controller: "Performer"
+  /performers/byartist/{artistID}:
+    get:
+      tags:
+      - "performer"
+      summary: "Find Companies by artist"
+      description: "Returns companies"
+      operationId: "getPerformerByArtist"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "artistID"
+        in: "path"
+        description: "ID of artist"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items: {}
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Performer not found"
+      x-swagger-router-controller: "Performer"
+
+  /user/cart:
+    get:
+      tags:
+      - "user"
+      summary: "Find events booked by user"
+      description: "Returns a list of events"
+      operationId: "getCart"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+      x-swagger-router-controller: "User"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logout"
+      description: "Logout the current user"
+      operationId: "logOut"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+      x-swagger-router-controller: "User"
+  /user/reserve/{eventID}:
+    get:
+      tags:
+      - "user"
+      summary: "Reserve an event"
+      description: "Reserve an event"
+      operationId: "reserveByEventID"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventID"
+        in: "path"
+        description: "ID of event to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+        401:
+          description: "Not logged in"
+        404:
+          description: "Error"
+      x-swagger-router-controller: "User"
+  /user/remove/{eventID}:
+    get:
+      tags:
+      - "user"
+      summary: "Remove an event"
+      description: "Resmove an event"
+      operationId: "removeByEventID"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventID"
+        in: "path"
+        description: "ID of event to remove"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+      x-swagger-router-controller: "User"
+
+  /user/login:
+    post:
+      tags:
+      - "user"
+      summary: "Login"
+      description: "Login with a form"
+      operationId: "userLoginPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful login"
+        401:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+  /user/register:
+    post:
+      tags:
+      - "user"
+      summary: "Register"
+      description: "Register"
+      operationId: "userRegisterPOST"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "succesful registration"
+        401:
+          description: "unauthorized"
+      x-swagger-router-controller: "User"
+definitions:
+  Types:
+    type: "string"
+    enum:
+    - "Music"
+    - "Theatre"
+    - "Opera"
+    - "Dance"
+    - "Seminar"
+  Artist:
+    type: "object"
+    properties:
+      ArtistID:
+        type: "integer"
+      Name:
+        type: "string"
+      Achievemets:
+        type: "string"
+    example:
+      CompanyID: 21
+      Name: "Joe Fracchio"
+      Achievements: "He probably brags about lots of things but he ended up performing at this festival so probably they're all bullshit. Anyway he's here and we payed for his cachet so we gotta get along with him."
+  Company:
+    type: "object"
+    properties:
+      CompanyID:
+        type: "integer"
+      Name:
+        type: "string"
+      Achievemets:
+        type: "string"
+    example:
+      CompanyID: 21
+      Name: "Company of Mauro"
+      Achievements: "They probably brag about lots of things but they ended up performing at this festival so probably they're all bullshit. Anyway they're here and we payed for the cachet so we gotta get along with them"
+  Seminar:
+    type: "object"
+    properties:
+      SeminarID:
+        type: "integer"
+      Place:
+        type: "string"
+      Description:
+        type: "string"
+      Title:
+        type: "string"
+      Date:
+        type: "string"
+    example:
+      SeminarID: 21
+      Place: "Auditorium"
+      Description: "We talk about lots of things, one more ethereal and ineffable than the other so that we can say we're smart but we're actually talking nonsense. If you condensed our speeches you'd be left with nothing more than 2 hours of your time wasted."
+      Title: "A good explanation"
+      Date: "2019-08-01"
+  Event:
+    type: "object"
+    properties:
+      EventID:
+        type: "integer"
+      Facts:
+        type: "string"
+      Abstract:
+        type: "string"
+      Title:
+        type: "string"
+      Date:
+        type: "string"
+    example:
+      EventID: 11
+      Facts: "In his new iteration this year, the festival aims at providing any attendant with a resonant new experience. Exhibitions will see artists on stage interacting with the public, and the public itself becoming the lead star on stage."
+      Abstract: "Discover new armonics and experience live, authentic music in our majestic scenery."
+      Title: "Summer music festival"
+      Date: "2019-08-01"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

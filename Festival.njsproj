@@ -118,6 +118,7 @@
     <Content Include="www\statics\js\checkLogin.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="www\swagger.yaml" />
     <Content Include="www\types.html">
       <SubType>Code</SubType>
     </Content>
