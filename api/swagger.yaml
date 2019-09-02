@@ -582,75 +582,70 @@ definitions:
     - "Opera"
     - "Dance"
     - "Seminar"
-  User:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      username:
-        type: "string"
-      password:
-        type: "string"
-      eventList:
-        type: "array"
-        items:
-          type: "integer"
-    example:
-      password: "password"
-      eventList:
-      - 6
-      - 6
-      id: 0
-      username: "username"
   Artist:
     type: "object"
     properties:
-      id:
+      ArtistID:
         type: "integer"
-      name:
+      Name:
         type: "string"
-      achievements:
+      Achievemets:
         type: "string"
+    example:
+      CompanyID: 21
+      Name: "Joe Fracchio"
+      Achievements: "He probably brags about lots of things but he ended up performing at this festival so probably they're all bullshit. Anyway he's here and we payed for his cachet so we gotta get along with him."
   Company:
     type: "object"
     properties:
-      id:
+      CompanyID:
         type: "integer"
-      name:
+      Name:
         type: "string"
+      Achievemets:
+        type: "string"
+    example:
+      CompanyID: 21
+      Name: "Company of Mauro"
+      Achievements: "They probably brag about lots of things but they ended up performing at this festival so probably they're all bullshit. Anyway they're here and we payed for the cachet so we gotta get along with them"
   Seminar:
     type: "object"
     properties:
-      id:
+      SeminarID:
         type: "integer"
-      title:
+      Place:
         type: "string"
-      date:
+      Description:
         type: "string"
-      place:
+      Title:
+        type: "string"
+	  Date:
         type: "string"
     example:
-      date: "date"
-      id: 0
-      place: "place"
-      title: "title"
+      SeminarID: 21
+      Place: "Auditorium"
+      Description: "We talk about lots of things, one more ethereal and ineffable than the other so that we can say we're smart but we're actually talking nonsense. If you condensed our speeches you'd be left with nothing more than 2 hours of your time wasted."
+      Title: "A good explanation"
+	  Date: "2019-08-01"
   Event:
     type: "object"
     properties:
-      id:
+      EventID:
         type: "integer"
-      fact:
+      Facts:
         type: "string"
-      abstract:
+      Abstract:
         type: "string"
-      type:
-        $ref: "#/definitions/Types"
+      Title:
+        type: "string"
+	  Date:
+        type: "string"
     example:
-      fact: "fact"
-      id: 0
-      abstract: "abstract"
-      type: {}
+      EventID: 11
+      Facts: "In his new iteration this year, the festival aims at providing any attendant with a resonant new experience. Exhibitions will see artists on stage interacting with the public, and the public itself becoming the lead star on stage."
+      Abstract: "Discover new armonics and experience live, authentic music in our majestic scenery."
+      Title: "Summer music festival"
+	  Date: "2019-08-01"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
