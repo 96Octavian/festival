@@ -264,24 +264,6 @@ paths:
         404:
           description: "Event not found"
       x-swagger-router-controller: "Event"
-  /event/byuser:
-    get:
-      tags:
-      - "event"
-      summary: "Find events by user"
-      description: "Returns a list of events"
-      operationId: "getEventByUser"
-      produces:
-      - "application/json"
-      parameters: []
-      responses:
-        200:
-          description: "A collection of Events"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Event"
-      x-swagger-router-controller: "Event"
   /events/bytype:
     get:
       tags:
@@ -463,31 +445,36 @@ paths:
           description: "Performer not found"
       x-swagger-router-controller: "Performer"
 
-  /user/{username}:
+  /user/cart:
     get:
       tags:
       - "user"
-      summary: "Find user by username"
-      description: "Returns a user"
-      operationId: "getUserByUsername"
+      summary: "Find events booked by user"
+      description: "Returns a list of events"
+      operationId: "getCart"
       produces:
       - "application/json"
-      parameters:
-      - name: "username"
-        in: "path"
-        description: "username of username to return"
-        required: true
-        type: "integer"
-        format: "int64"
+      parameters: []
+      responses:
+        200:
+          description: "A collection of Events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+      x-swagger-router-controller: "User"
+  /user/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logout"
+      description: "Logout the current user"
+      operationId: "logOut"
+      produces:
+      - "application/json"
       responses:
         200:
           description: "successful operation"
-          schema:
-            $ref: "#/definitions/User"
-        400:
-          description: "Invalid username supplied"
-        404:
-          description: "User not found"
       x-swagger-router-controller: "User"
   /user/reserve/{eventID}:
     get:
@@ -513,6 +500,27 @@ paths:
         404:
           description: "Error"
       x-swagger-router-controller: "User"
+  /user/remove/{eventID}:
+    get:
+      tags:
+      - "user"
+      summary: "Remove an event"
+      description: "Resmove an event"
+      operationId: "removeByEventID"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "eventID"
+        in: "path"
+        description: "ID of event to remove"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+      x-swagger-router-controller: "User"
+
   /user/login:
     post:
       tags:

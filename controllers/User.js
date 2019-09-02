@@ -3,9 +3,14 @@
 var utils = require( '../utils/writer.js' );
 var User = require( '../service/UserService' );
 
-module.exports.getUserByUsername = function getUserByUsername( req, res, next ) {
-	var username = req.swagger.params['username'].value;
-	User.getUserByUsername( username )
+module.exports.logOut = function logOut( req, res, next ) {
+	req.session = null;
+	utils.writeJson( res, "/index.html", 200 );
+};
+
+module.exports.getCart = function getCart( req, res, next ) {
+	var userID = req.session.logged_id;
+	User.getCart( userID )
 		.then( function ( response ) {
 			utils.writeJson( res, response );
 		} )
@@ -46,6 +51,25 @@ module.exports.reserveByEventID = function reserveByEventID( req, res, next ) {
 		console.log( ids );
 		if ( ids.length > 0 ) {
 			console.log( "Event " + eventID + " reserved" );
+			utils.writeJson( res, "", 200 );
+		} else {
+			utils.writeJson( res, "", 401 );
+		}
+	} )
+};
+
+module.exports.removeByEventID = function removeByEventID( req, res, next ) {
+	var eventID = req.swagger.params["eventID"].value;
+	if ( typeof req.session.logged_id === 'undefined' ) {
+		req.session = null;
+		utils.writeJson( res, "", 401 );
+		return;
+	}
+	var userID = req.session.logged_id;
+	User.removeByEventID( userID, eventID ).then( ids => {
+		console.log( ids );
+		if ( ids == 1 ) {
+			console.log( "Event " + eventID + " removed" );
 			utils.writeJson( res, "", 200 );
 		} else {
 			utils.writeJson( res, "", 401 );

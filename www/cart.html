@@ -71,6 +71,10 @@
         <div class="container">
             <div class="row">
                 <h3 id="type" class="left col s12 m12">Reservations</h3>
+                <button id="logout" class="btn waves-effect waves-light" onclick="logout()">
+                    Log out
+                    <i class="material-icons right">exit_to_app</i>
+                </button>
             </div>
             <div class="section">
                 <div></div>
@@ -127,13 +131,17 @@
                 <h6 style="display: inline;padding-right: 20px">Title</h6>
             </a>
             <p id="plot" style="display: inline;">Lorem ipsum dolor sit amet, quem populo at sed, eos mundi lucilius id. Vel id fastidii voluptua reprehendunt. Eirmod debitis detracto ex est, te his justo placerat abhorreant. Sea in erant diceret evertitur, no sonet corpora voluptaria nam. Dicta probatus ius te, no eum integre dissentiet deterruisset. Percipit detraxit facilisi ex eam. No harum neglegentur cum, exerci adipisci periculis has in.</p>
+            <button id="remove" class="btn waves-effect waves-light">
+                Remove
+                <i class="material-icons right">exit_to_app</i>
+            </button>
             <p></p>
             <div class="divider"></div>
         </div>
     </template>
     <script>
         let xhr = new XMLHttpRequest();
-        xhr.open( "GET", "/v2/event/byuser/" );
+        xhr.open( "GET", "/v2/user/cart" );
         xhr.onload = function () {
             if ( this.responseText == 0 ) {
                 console.log( "Server DB empy response" );
@@ -144,16 +152,50 @@
                     let temp = document.getElementById( "template-event" );
                     let event = temp.content.cloneNode( true );
                     event = event.firstElementChild;
-                    event.setAttribute( "id", events_array[i].Title );
+                    event.setAttribute( "id", events_array[i].EventID );
                     event.querySelector( "a" ).setAttribute( "href", "/events/" + events_array[i].EventID );
                     event.querySelector( "h6" ).innerHTML = events_array[i].Title;
                     event.querySelector( "#plot" ).innerHTML = events_array[i].Facts;
+                    event.querySelector( "#remove" ).setAttribute( "onclick", "remove(" + events_array[i].EventID + ")" );
+                    event.querySelector( "#remove" ).setAttribute( "id", "button_" + events_array[i].EventID );
                     let eElement = document.getElementsByClassName( "section" )[0];
                     eElement.insertBefore( event, eElement.firstChild );
                 }
             }
         }
         xhr.send();
+    </script>
+    <script>
+        var logout = function () {
+            let user = new XMLHttpRequest();
+
+            user.open( "GET", "/v2/user/logout" );
+            user.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+            user.onreadystatechange = function () {
+                if ( this.readyState === XMLHttpRequest.DONE ) {
+                    window.location.replace( this.responseText );
+                }
+            }
+            user.send();
+        }
+    </script>
+    <script>
+        var remove = function ( eventID ) {
+            //let eventID = clicked_id.replace( "button_", "" );
+            let user = new XMLHttpRequest();
+
+            user.open( "GET", "/v2/user/remove/" + eventID );
+            user.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+            user.onreadystatechange = function () {
+                if ( this.readyState === XMLHttpRequest.DONE ) {
+                    if ( this.status == 200 ) {
+                        let element = document.getElementById( eventID );
+                        element.parentNode.removeChild( element );
+                    }
+                }
+            }
+            user.send();
+        }
     </script>
 
 </body>

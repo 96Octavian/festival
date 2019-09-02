@@ -20,6 +20,29 @@ exports.usersDbSetup = function ( database ) {
 };
 
 /**
+ * Find events by user
+ * Returns a list of events
+ *
+ * userID String performer of events to return
+ * returns List
+ **/
+exports.getCart = function ( userID ) {
+	return sqlDb( "UserToEvent" )
+		.select( 'EventID' )
+		.where( 'UserID', userID )
+		.then( rows => {
+			let ids = []
+			let lista = JSON.stringify( rows, null, 2 );
+			lista = ( JSON.parse( lista ) );
+			for ( let i = 0; i < lista.length; i++ ) {
+				ids.push( lista[i].EventID );
+			}
+			return sqlDb( "Events" )
+				.whereIn( 'EventID', ids );
+		} )
+}
+
+/**
  * Find user by username
  * Returns a user
  *
@@ -79,6 +102,19 @@ exports.reserveByEventID = function ( username, eventID ) {
 		}
 	} )
 
+}
+
+/**
+ * Remove
+ * Remove an event
+ *
+ * username String 
+ * eventID Integer 
+ * no response value expected for this operation
+ **/
+exports.removeByEventID = function ( username, eventID ) {
+	console.log( "Params: " + username + ", " + eventID );
+	return sqlDb( 'UserToEvent' ).where( 'UserID', username ).andWhere( 'EventID', eventID ).del();
 }
 
 /**
