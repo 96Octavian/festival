@@ -176,6 +176,7 @@
                         pic = pic.firstElementChild;
                         pic.setAttribute( "class", "mySlides fade" );
                         pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/" + pics_array[i].Filename );
+                        pic.querySelector( "img" ).setAttribute( "alt", "image_" + pics_array[i].Filename );
                         if ( pics_array[i].Filename.includes( "cover" ) ) {
                             pic.style.display = "block";
                         }
