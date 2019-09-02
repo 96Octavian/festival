@@ -141,6 +141,9 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 			if ( req.url.includes( "app.zip" ) ) {
 				req.url = "app.zip";
 			}
+			if ( req.url.includes( "main.html" ) ) {
+				req.url = "main.html";
+			}
 		}
 
 		serving( req, res, next );

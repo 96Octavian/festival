@@ -84,6 +84,7 @@
     <Content Include="www\login.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="www\main.html" />
     <Content Include="www\performers.html">
       <SubType>Code</SubType>
     </Content>
