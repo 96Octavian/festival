@@ -177,17 +177,27 @@
             }
             else {
                 //console.log( this.responseText + " (" + typeof ( this.responseText ) + ")" );
-                let days_array = JSON.parse( this.responseText );
+                var days_array = JSON.parse( this.responseText );
+                var listitems = [];
                 for ( let i = 0; i < days_array.length; i++ ) {
                     let temp = document.getElementById( "template-row" );
                     let day = temp.content.cloneNode( true );
                     day = day.firstElementChild;
-                    console.log( days_array[i].Date );
                     day.setAttribute( "id", days_array[i].Date );
                     day.querySelector( "h5" ).innerHTML = days_array[i].Date;
                     let eElement = document.getElementsByClassName( "section" )[0];
                     eElement.insertBefore( day, eElement.firstChild );
                     eventer( days_array[i].Date );
+                    listitems.push( day );
+                }
+                let mylist = document.getElementsByClassName( 'section' )[0];
+                listitems.sort( function ( a, b ) {
+                    var compA = a.getAttribute( 'id' ).toUpperCase();
+                    var compB = b.getAttribute( 'id' ).toUpperCase();
+                    return ( compA < compB ) ? -1 : ( compA > compB ) ? 1 : 0;
+                } );
+                for ( i = 0; i < listitems.length; i++ ) {
+                    mylist.appendChild( listitems[i] );
                 }
 
             }

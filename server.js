@@ -1,6 +1,3 @@
-// TODO: Wrap events in events.html
-// TODO: Better spacing in events.html
-// TODO: performer.html is for both artist and company
 'use strict';
 
 var fs = require( 'fs' ),

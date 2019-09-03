@@ -32,27 +32,6 @@ exports.getCalendar = function ( offset, limit ) {
 		.distinct( "Date" )
 		.limit( limit )
 		.offset( offset )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = [{
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}, {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}];
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 /**
@@ -67,27 +46,6 @@ exports.getSeminaries = function ( offset, limit ) {
 	return sqlDb( "Seminaries" )
 		.limit( limit )
 		.offset( offset )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = [{
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}, {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}];
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 /**
@@ -111,27 +69,6 @@ exports.getEventByDate = function ( date ) {
 			return sqlDb( "Events" )
 				.whereIn( 'EventID', ids );
 		} )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = [{
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}, {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}];
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 
@@ -145,21 +82,6 @@ exports.getEventByDate = function ( date ) {
 exports.getEventById = function ( eventID ) {
 	return sqlDb( "Events" )
 		.where( 'EventID', eventID );
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	};
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 /**
@@ -172,21 +94,6 @@ exports.getEventById = function ( eventID ) {
 exports.getSeminarById = function ( seminarID ) {
 	return sqlDb( "Seminaries" )
 		.where( 'SeminarID', seminarID );
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	};
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 /**
@@ -199,21 +106,6 @@ exports.getSeminarById = function ( seminarID ) {
 exports.getGalleryById = function ( eventID ) {
 	return sqlDb( "Gallery" )
 		.where( 'EventID', eventID );
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	};
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 /**
@@ -237,27 +129,6 @@ exports.getEventByPerformer = function ( performerID ) {
 			return sqlDb( "Events" )
 				.whereIn( 'EventID', ids );
 		} )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = [{
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}, {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}];
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 /**
@@ -282,27 +153,6 @@ exports.getEventByUser = function ( userID ) {
 			return sqlDb( "Events" )
 				.whereIn( 'EventID', ids );
 		} )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = [{
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}, {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}];
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 /**
@@ -326,27 +176,6 @@ exports.getEventBySeminar = function ( seminarID ) {
 			return sqlDb( "Events" )
 				.whereIn( 'EventID', ids );
 		} )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = [{
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}, {
-	//		"fact": "fact",
-	//		"id": 0,
-	//		"abstract": "abstract",
-	//		"type": {},
-	//		"gallery": "gallery"
-	//	}];
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 
@@ -371,15 +200,6 @@ exports.getEventByType = function ( type ) {
 			return sqlDb( "Events" )
 				.whereIn( 'EventID', ids );
 		} )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = ["", ""];
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 
 
@@ -423,19 +243,5 @@ exports.getSeminarByEvent = function ( eventID ) {
 			return sqlDb( "Seminaries" )
 				.whereIn( 'SeminarID', ids );
 		} )
-	//return new Promise( function ( resolve, reject ) {
-	//	var examples = {};
-	//	examples['application/json'] = {
-	//		"date": "date",
-	//		"id": 0,
-	//		"place": "place",
-	//		"title": "title"
-	//	};
-	//	if ( Object.keys( examples ).length > 0 ) {
-	//		resolve( examples[Object.keys( examples )[0]] );
-	//	} else {
-	//		resolve();
-	//	}
-	//} );
 }
 

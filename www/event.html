@@ -101,7 +101,6 @@
                                 Logged out
                                 <i class="material-icons teal-text right">cancel</i>
                             </button>
-                            or
                             <a id="seminar">Join the discussion: seminar</a>
                         </div>
 
@@ -161,6 +160,24 @@
     </template>
     <script>
 
+        let check = function () {
+            let seminar = new XMLHttpRequest();
+            seminar.open( "GET", "/v2/events/seminarbyevent/" + EventID );
+            seminar.onload = function () {
+                if ( this.responseText == 0 ) {
+                    console.log( "Server DB empy response" );
+                }
+                else {
+                    let id = JSON.parse( this.responseText )
+                    if ( id.length == 0 ) {
+                        let element = document.getElementById( "seminar" );
+                        element.parentNode.removeChild( element );
+                    }
+                }
+            }
+            seminar.send();
+        }
+
         let picker = function () {
             let xhr = new XMLHttpRequest();
             xhr.open( "GET", "/v2/events/gallery/" + EventID );
@@ -213,7 +230,7 @@
                 else {
                     let artist = JSON.parse( this.responseText )[0];
                     document.getElementById( "author" ).querySelector( "a" ).innerHTML = artist.Name;
-                    document.getElementById( "author" ).querySelector( "a" ).setAttribute( "href", "/performers/" + artist.ArtistID );
+                    document.getElementById( "author" ).querySelector( "a" ).setAttribute( "href", "/performers/" + (typeof artist.ArtistID !== 'undefined' ? artist.ArtistID : artist.CompanyID));
 
                 }
             }
@@ -239,19 +256,8 @@
 
 
                 picker();
-                //let temp = document.getElementById( "template-pic" );
-                //let pic = temp.content.cloneNode( true );
-                //pic = pic.firstElementChild;
-                //pic.setAttribute( "class", "mySlides fade" );
-                //pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/cover.png" );
-                //document.getElementById( "slideshow" ).appendChild( pic );
 
-                //temp = document.getElementById( "template-pic" );
-                //pic = temp.content.cloneNode( true );
-                //pic = pic.firstElementChild;
-                //pic.setAttribute( "class", "mySlides fade" );
-                //pic.querySelector( "img" ).setAttribute( "src", "/statics/events/" + EventID + "/1.png" );
-                //document.getElementById( "slideshow" ).appendChild( pic );
+                check();
             }
         }
         event.send();

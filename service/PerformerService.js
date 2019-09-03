@@ -45,15 +45,6 @@ exports.companiesDbSetup = function ( database ) {
 exports.getPerformerByEvent = function ( eventID ) {
 	return sqlDb( "EventToArtist" )
 		.where( 'EventID', eventID );
-  //return new Promise(function(resolve, reject) {
-  //  var examples = {};
-  //  examples['application/json'] = [ "", "" ];
-  //  if (Object.keys(examples).length > 0) {
-  //    resolve(examples[Object.keys(examples)[0]]);
-  //  } else {
-  //    resolve();
-  //  }
-  //});
 }
 
 /**
@@ -66,15 +57,6 @@ exports.getPerformerByEvent = function ( eventID ) {
 exports.getPerformerByCompany = function ( companyID ) {
 	return sqlDb( "ArtistToCompany" )
 		.where( 'CompanyID', companyID );
-	//return new Promise(function(resolve, reject) {
-	//  var examples = {};
-	//  examples['application/json'] = [ "", "" ];
-	//  if (Object.keys(examples).length > 0) {
-	//    resolve(examples[Object.keys(examples)[0]]);
-	//  } else {
-	//    resolve();
-	//  }
-	//});
 }
 
 /**
@@ -87,15 +69,6 @@ exports.getPerformerByCompany = function ( companyID ) {
 exports.getPerformerByArtist = function ( artistID ) {
 	return sqlDb( "ArtistToCompany" )
 		.where( 'ArtistID', artistID );
-	//return new Promise(function(resolve, reject) {
-	//  var examples = {};
-	//  examples['application/json'] = [ "", "" ];
-	//  if (Object.keys(examples).length > 0) {
-	//    resolve(examples[Object.keys(examples)[0]]);
-	//  } else {
-	//    resolve();
-	//  }
-	//});
 }
 
 /**
@@ -112,15 +85,6 @@ exports.getPerformerById = function ( performerID ) {
 	}
 	else return sqlDb( "Companies" )
 		.where( 'CompanyID', performerID );
-  //return new Promise(function(resolve, reject) {
-  //  var examples = {};
-  //  examples['application/json'] = "";
-  //  if (Object.keys(examples).length > 0) {
-  //    resolve(examples[Object.keys(examples)[0]]);
-  //  } else {
-  //    resolve();
-  //  }
-  //});
 }
 
 
@@ -136,14 +100,5 @@ exports.getPerformers = function ( offset, limit ) {
 	return sqlDb( "Artists" )
 		.limit( limit )
 		.offset( offset );
-  //return new Promise(function(resolve, reject) {
-  //  var examples = {};
-  //  examples['application/json'] = [ "", "" ];
-  //  if (Object.keys(examples).length > 0) {
-  //    resolve(examples[Object.keys(examples)[0]]);
-  //  } else {
-  //    resolve();
-  //  }
-  //});
 }
 

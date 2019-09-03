@@ -75,6 +75,7 @@
                     Log out
                     <i class="material-icons right">exit_to_app</i>
                 </button>
+                <h4 id="empty">No events booked</h4>
             </div>
             <div class="section">
                 <div></div>
@@ -148,6 +149,9 @@
             }
             else {
                 let events_array = JSON.parse( this.responseText );
+                if ( events_array.length != 0 ) {
+                    document.getElementById( "empty" ).style.display = "none";
+                }
                 for ( let i = 0; i < events_array.length; i++ ) {
                     let temp = document.getElementById( "template-event" );
                     let event = temp.content.cloneNode( true );
@@ -181,7 +185,6 @@
     </script>
     <script>
         var remove = function ( eventID ) {
-            //let eventID = clicked_id.replace( "button_", "" );
             let user = new XMLHttpRequest();
 
             user.open( "GET", "/v2/user/remove/" + eventID );
@@ -190,7 +193,11 @@
                 if ( this.readyState === XMLHttpRequest.DONE ) {
                     if ( this.status == 200 ) {
                         let element = document.getElementById( eventID );
-                        element.parentNode.removeChild( element );
+                        let parent = element.parentNode;
+                        parent.removeChild( element );
+                        if ( parent.childElementCount == 1 ) {
+                            document.getElementById( "empty" ).style.display = "block";
+                        }
                     }
                 }
             }
