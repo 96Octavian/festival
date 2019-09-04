@@ -5,7 +5,7 @@ let { artistsDbSetup, companiesDbSetup } = require( "./PerformerService" );
 let { usersDbSetup } = require( "./UserService" );
 
 let sqlDb = sqlDbFactory( {
-	//client: "pg",
+	client: "pg",
 	//connection: {
 	//	host: "127.0.0.1",
 	//	user: "postgres",
