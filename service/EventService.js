@@ -35,14 +35,14 @@ exports.getCalendar = function ( offset, limit ) {
 }
 
 /**
- * Get available seminaries
- * Get a list of all the seminaries in the calendar
+ * Get available seminars
+ * Get a list of all the seminars in the calendar
  *
  * offset Integer Pagination offset. Default is 0. (optional)
  * limit Integer Maximum number of items per page. Default is 20 and cannot exceed 500. (optional)
  * returns List
  **/
-exports.getSeminaries = function ( offset, limit ) {
+exports.getseminars = function ( offset, limit ) {
 	return sqlDb( "Seminaries" )
 		.limit( limit )
 		.offset( offset )

@@ -100,7 +100,7 @@ swaggerTools.initializeMiddleware( swaggerDoc, function ( middleware ) {
 		if ( req.url.includes( "byseminar/" ) ) {
 			req.url = "byseminar.html";
 		}
-		if ( req.url.match( /^\/events\/seminaries\/([0-9]+)$/ ) ) {
+		if ( req.url.match( /^\/events\/seminars\/([0-9]+)$/ ) ) {
 			req.url = "seminar.html";
 		}
 		if ( req.url.includes( "login.html" ) || req.url.includes( "cart.html" ) ) {

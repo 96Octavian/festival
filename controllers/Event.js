@@ -15,10 +15,10 @@ module.exports.getCalendar = function getCalendar( req, res, next ) {
 		} );
 };
 
-module.exports.getSeminaries = function getSeminaries( req, res, next ) {
+module.exports.getseminars = function getseminars( req, res, next ) {
 	var offset = req.swagger.params['offset'].value || 0;
 	var limit = req.swagger.params['limit'].value || 20 < 500 ? req.swagger.params['limit'].value : 500;
-	Event.getSeminaries( offset, limit )
+	Event.getseminars( offset, limit )
 		.then( function ( response ) {
 			utils.writeJson( res, response );
 		} )

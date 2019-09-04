@@ -128,8 +128,8 @@
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
             <ul class="left">
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Reservations</a></li>
+                <li><a href="/contactus.html">Contact us</a></li>
+                <li><a href="/reservations.html">Reservations</a></li>
             </ul>
 
         </div>
@@ -208,37 +208,37 @@
 
     </script>
     <script>
-        var register = function() {
-			if (!document.getElementById("register_username").value || !document.getElementById("register_password").value || !document.getElementById("register_confirm_password").value) {
-				return;
-			}
+        var register = function () {
+            if ( !document.getElementById( "register_username" ).value || !document.getElementById( "register_password" ).value || !document.getElementById( "register_confirm_password" ).value ) {
+                return;
+            }
 
-			if (document.getElementById("register_password").value != document.getElementById("register_confirm_password").value) {
-				document.getElementById("register_confirm_password").className = "validate invalid";
-				return;
-			}
-			document.getElementById("register_confirm_password").className = "validate valid";
+            if ( document.getElementById( "register_password" ).value != document.getElementById( "register_confirm_password" ).value ) {
+                document.getElementById( "register_confirm_password" ).className = "validate invalid";
+                return;
+            }
+            document.getElementById( "register_confirm_password" ).className = "validate valid";
 
-			username = document.getElementById("register_username").value;
-			password = document.getElementById("register_password").value;
+            username = document.getElementById( "register_username" ).value;
+            password = document.getElementById( "register_password" ).value;
 
-			var xhr = new XMLHttpRequest();
-			params = "username=" + username + "&password=" + password;
-			xhr.open("POST", "v2/user/register?username=" + username + "&password=" + password, true);
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.onreadystatechange = function() {
-				if (this.readyState === XMLHttpRequest.DONE) {
-					if (this.status == 403) {
-						alert("Username already registered. Try to login");
-						return;
+            var xhr = new XMLHttpRequest();
+            params = "username=" + username + "&password=" + password;
+            xhr.open( "POST", "v2/user/register?username=" + username + "&password=" + password, true );
+            xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+            xhr.onreadystatechange = function () {
+                if ( this.readyState === XMLHttpRequest.DONE ) {
+                    if ( this.status == 403 ) {
+                        alert( "Username already registered. Try to login" );
+                        return;
                     } else if ( this.status == 200 ) {
-						window.location.replace( this.responseText );
-					}
-				}
-			}
-			xhr.send(params);
-			
-		}
+                        window.location.replace( this.responseText );
+                    }
+                }
+            }
+            xhr.send( params );
+
+        }
     </script>
 
 </body>

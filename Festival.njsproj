@@ -65,6 +65,9 @@
     <Content Include="www\cart.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="www\contactus.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="www\css\materialize.css" />
     <Content Include="www\css\materialize.min.css" />
     <Content Include="www\css\style.css" />
@@ -86,6 +89,9 @@
     </Content>
     <Content Include="www\main.html" />
     <Content Include="www\performers.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="www\reservations.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="www\sameday.html">

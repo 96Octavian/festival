@@ -53,13 +53,13 @@ paths:
             items:
               $ref: "#/definitions/Event"
       x-swagger-router-controller: "Event"
-  /events/seminaries:
+  /events/seminars:
     get:
       tags:
       - "event"
-      summary: "Get available seminaries"
-      description: "Get a list of all the seminaries in the calendar"
-      operationId: "getSeminaries"
+      summary: "Get available seminars"
+      description: "Get a list of all the seminars in the calendar"
+      operationId: "getseminars"
       produces:
       - "application/json"
       parameters:
@@ -76,13 +76,13 @@ paths:
         type: "integer"
       responses:
         200:
-          description: "A collection of Seminaries"
+          description: "A collection of seminars"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Seminar"
       x-swagger-router-controller: "Event"
-  /events/seminaries/{seminarID}:
+  /events/seminars/{seminarID}:
     get:
       tags:
       - "event"

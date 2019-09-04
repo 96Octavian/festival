@@ -81,8 +81,8 @@
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
             <ul class="left">
-                <li><a href="#">Contact us</a></li>
-                <li><a href="#">Reservations</a></li>
+                <li><a href="/contactus.html">Contact us</a></li>
+                <li><a href="/reservations.html">Reservations</a></li>
             </ul>
 
         </div>
@@ -136,21 +136,21 @@
         document.getElementById( "type" ).innerHTML = type;
         if ( type == "Seminar" ) {
             let xhr = new XMLHttpRequest();
-            xhr.open( "GET", "/v2/events/seminaries/" );
+            xhr.open( "GET", "/v2/events/seminars/" );
             xhr.onload = function () {
                 if ( this.responseText == 0 ) {
                     console.log( "Server DB empy response" );
                 }
                 else {
-                    let seminaries_array = JSON.parse( this.responseText );
-                    for ( let i = 0; i < seminaries_array.length; i++ ) {
+                    let seminars_array = JSON.parse( this.responseText );
+                    for ( let i = 0; i < seminars_array.length; i++ ) {
                         let temp = document.getElementById( "template-event" );
                         let seminar = temp.content.cloneNode( true );
                         seminar = seminar.firstElementChild;
-                        seminar.setAttribute( "id", seminaries_array[i].Title );
-                        seminar.querySelector( "a" ).setAttribute( "href", "/events/seminaries/" + seminaries_array[i].SeminarID );
-                        seminar.querySelector( "h6" ).innerHTML = seminaries_array[i].Title;
-                        seminar.querySelector( "#plot" ).innerHTML = seminaries_array[i].Description;
+                        seminar.setAttribute( "id", seminars_array[i].Title );
+                        seminar.querySelector( "a" ).setAttribute( "href", "/events/seminars/" + seminars_array[i].SeminarID );
+                        seminar.querySelector( "h6" ).innerHTML = seminars_array[i].Title;
+                        seminar.querySelector( "#plot" ).innerHTML = seminars_array[i].Description;
                         let eElement = document.getElementsByClassName( "section" )[0];
                         eElement.insertBefore( seminar, eElement.firstChild );
                     }
