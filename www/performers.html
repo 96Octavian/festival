@@ -140,7 +140,15 @@
     <script>
         let check = function () {
             let affiliation = new XMLHttpRequest();
-            affiliation.open( "GET", "/v2/performers/byartist/" + ArtistID );
+            let addr = "";
+            if ( String( ArtistID ).charAt( 0 ) == '1' ) {
+                addr = "/v2/performers/byartist/" + ArtistID;
+            }
+            else {
+                addr = "/v2/performers/bycompany/" + ArtistID;
+            }
+
+            affiliation.open( "GET", addr );
             affiliation.onload = function () {
                 if ( this.responseText == 0 ) {
                     console.log( "Server DB empy response" );
